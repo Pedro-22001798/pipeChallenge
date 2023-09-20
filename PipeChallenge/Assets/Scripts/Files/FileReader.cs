@@ -28,15 +28,16 @@ public class FileReader : MonoBehaviour
                 {
                     string pipeType = cells[col];
                     float rotation = float.Parse(cells[col + 1]);
+                    int actualCol = col / 2 + 1;
                     PipeType typeOfPipe = GetTypeOfPipe(pipeType);
                     IPipe pipe;
                     if (typeOfPipe == PipeType.light)
                     {
-                        pipe = new Pipe(true, typeOfPipe,rotation,row,col);
+                        pipe = new Pipe(true, typeOfPipe,rotation,row,actualCol);
                     }
                     else
                     {
-                        pipe = new Pipe(false, typeOfPipe,rotation,row,col);
+                        pipe = new Pipe(false, typeOfPipe,rotation,row,actualCol);
                     }
 
                     allPipes.Add(pipe);

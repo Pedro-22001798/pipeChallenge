@@ -7,16 +7,14 @@ public class PipeClick : MonoBehaviour
     public IPipe Pipe {get; private set;}
     private View view;
     private SpriteRenderer sr;
-    private bool isLight;
     private bool isRotating;
 
-    public void DefinePipe(IPipe pipe, View view, bool isLight)
+    public void DefinePipe(IPipe pipe, View view)
     {
         this.Pipe = pipe;
         this.view = view;
-        this.isLight = isLight;
         sr = GetComponent<SpriteRenderer>();
-        ChangeColor(isLight);
+        ChangeColor(Pipe.IsLight);
     }
 
     public void RotatePipe()
@@ -30,33 +28,24 @@ public class PipeClick : MonoBehaviour
 
     public bool IsLight()
     {
-        //return Pipe.IsLight;
-        return isLight;
+        return Pipe.IsLight;
     }
 
     public void LightPipe()
     {
-        // if(!Pipe.IsLight)
-        // {
-        //     Pipe.LightPipe();
-        // }
-        if(!isLight)
+        if(!Pipe.IsLight)
         {
-            isLight = true;
-            ChangeColor(isLight);
+            Pipe.LightPipe();
+            ChangeColor(Pipe.IsLight);
         }
     }
 
     public void UnlightPipe()
     {
-        // if(Pipe.IsLight)
-        // {
-        //     Pipe.UnlightPipe();
-        // }
-        if(isLight)
+        if(Pipe.IsLight)
         {
-            isLight = false;
-            ChangeColor(isLight);
+            Pipe.UnlightPipe();
+            ChangeColor(Pipe.IsLight);
         }
     }
 

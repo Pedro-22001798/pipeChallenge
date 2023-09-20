@@ -349,8 +349,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa61e4f8068b6dc4584426348d6a3ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  view: {fileID: 1497079917}
-  isLight: 0
 --- !u!61 &878122617
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -399,8 +397,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa61e4f8068b6dc4584426348d6a3ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  view: {fileID: 1497079917}
-  isLight: 1
 --- !u!61 &979486735
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -475,8 +471,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa61e4f8068b6dc4584426348d6a3ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  view: {fileID: 1497079917}
-  isLight: 0
 --- !u!58 &1012515425
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -761,6 +755,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5236df337524fcc4caf61ce62829f72b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelController: {fileID: 1497079922}
 --- !u!114 &1497079920
 MonoBehaviour:
   m_ObjectHideFlags: 0

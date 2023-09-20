@@ -6,10 +6,10 @@ public class LevelController : MonoBehaviour
 {
     private List<IPipe> allEndingPipes = new List<IPipe>();
 
-    public void LoadNewLevel(List<IPipe> allEndingPipes)
+    public void LoadNewLevel(ILevel level)
     {
         allEndingPipes = new List<IPipe>();
-        this.allEndingPipes = allEndingPipes;
+        allEndingPipes = level.GetAllEndingPipes();
     }
 
     public bool CheckIfLevelWon()

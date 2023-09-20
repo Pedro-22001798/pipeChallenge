@@ -7,6 +7,7 @@ public class Pipe : IPipe
     public bool IsLight {get; private set;}
     public PipeType TypeOfPipe {get; private set;}
 
+
     public Pipe(bool isLight, PipeType typeOfPipe)
     {
         this.IsLight = isLight;

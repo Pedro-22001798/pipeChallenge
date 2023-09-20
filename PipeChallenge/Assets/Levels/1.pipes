@@ -1,0 +1,3 @@
+light,0,normal,90,curve,180
+normal,270,curve,0,end,90
+curve,90,normal,180,light,270

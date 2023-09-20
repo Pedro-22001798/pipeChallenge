@@ -5,4 +5,5 @@ using UnityEngine;
 public interface IView
 {
     void LightPipe();
+    void RotatePipe(Transform pipeTransform, PipeClick pipe);
 }

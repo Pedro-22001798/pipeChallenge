@@ -4,6 +4,20 @@ using UnityEngine;
 
 public class View : MonoBehaviour, IView
 {
+    [SerializeField] private Transform pipeContainer;
+    [SerializeField] private GameObject[] pipePrefabs;
+
+    public void BuildLevel(ILevel level)
+    {
+        List<IPipe> allPipes = level.GetAllPipes();
+        ClearLevel();
+        foreach(IPipe p in allPipes)
+        {
+            Quaternion rotation = Quaternion.Euler(0, 0, p.Rotation);
+            GameObject pipe = Instantiate(GetPipePrefab(p.TypeOfPipe),new Vector3(p.Col,-p.Row,0),rotation,pipeContainer);
+        }
+    }
+
     public void LightPipe()
     {
 
@@ -32,4 +46,28 @@ public class View : MonoBehaviour, IView
         pipe.AllowRotation();
     }
 
+    public void ClearLevel()
+    {
+        foreach(Transform t in pipeContainer)
+        {
+            Destroy(t);
+        }
+    }
+
+    private GameObject GetPipePrefab(PipeType typeOfPipe)
+    {
+        switch(typeOfPipe)
+        {
+            case PipeType.normal:
+                return pipePrefabs[0];
+            case PipeType.curve:
+                return pipePrefabs[1];
+            case PipeType.light:
+                return pipePrefabs[2];
+            case PipeType.end:
+                return pipePrefabs[3];
+        }
+
+        return pipePrefabs[0];
+    }
 }

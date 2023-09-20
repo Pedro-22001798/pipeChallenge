@@ -9,7 +9,7 @@ public class Program : MonoBehaviour
     private LevelController levelController;
     private FileReader fileReader;
     private AllLevels allLevels;
-    private IView view;
+    private View view;
 
     void Start()
     {
@@ -18,7 +18,8 @@ public class Program : MonoBehaviour
         fileDetection = GetComponent<FileDetection>();
         allLevels = GetComponent<AllLevels>();
         fileReader = GetComponent<FileReader>();
+        view = GetComponent<View>();
         fileReader.StartGame(allLevels);
-        levelLoader.StartGame(levelController,fileDetection,fileReader,allLevels);
+        levelLoader.StartGame(levelController,fileDetection,fileReader,allLevels, view);
     }
 }

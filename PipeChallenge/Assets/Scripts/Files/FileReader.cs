@@ -11,7 +11,7 @@ public class FileReader : MonoBehaviour
         this.allLevels = allLevels;
     }
 
-    public void ReadFile(string file, int currentLevel)
+    public ILevel ReadFile(string file, int currentLevel)
     {
         if (File.Exists(file))
         {
@@ -30,11 +30,11 @@ public class FileReader : MonoBehaviour
                     IPipe pipe;
                     if (typeOfPipe == PipeType.light)
                     {
-                        pipe = new Pipe(true, typeOfPipe,rotation);
+                        pipe = new Pipe(true, typeOfPipe,rotation,row,col);
                     }
                     else
                     {
-                        pipe = new Pipe(false, typeOfPipe,rotation);
+                        pipe = new Pipe(false, typeOfPipe,rotation,row,col);
                     }
 
                     allPipes.Add(pipe);
@@ -42,7 +42,10 @@ public class FileReader : MonoBehaviour
             }
             ILevel newLevel = new Level(currentLevel,allPipes);
             allLevels.CreateLevel(newLevel);
+            return newLevel;
         }
+
+        return null;
     }
 
     private PipeType GetTypeOfPipe(string pipe)

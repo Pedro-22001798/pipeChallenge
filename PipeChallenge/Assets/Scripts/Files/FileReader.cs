@@ -5,10 +5,12 @@ using UnityEngine;
 public class FileReader : MonoBehaviour
 {
     private AllLevels allLevels;
+    private View view;
 
-    public void StartGame(AllLevels allLevels)
+    public void StartGame(AllLevels allLevels, View view)
     {
         this.allLevels = allLevels;
+        this.view = view;
     }
 
     public ILevel ReadFile(string file, int currentLevel)

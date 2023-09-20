@@ -19,7 +19,7 @@ public class Program : MonoBehaviour
         allLevels = GetComponent<AllLevels>();
         fileReader = GetComponent<FileReader>();
         view = GetComponent<View>();
-        fileReader.StartGame(allLevels);
+        fileReader.StartGame(allLevels,view);
         levelLoader.StartGame(levelController,fileDetection,fileReader,allLevels, view);
     }
 }

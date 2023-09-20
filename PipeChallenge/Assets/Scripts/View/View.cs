@@ -15,6 +15,11 @@ public class View : MonoBehaviour, IView
         {
             Quaternion rotation = Quaternion.Euler(0, 0, p.Rotation);
             GameObject pipe = Instantiate(GetPipePrefab(p.TypeOfPipe),new Vector3(p.Col,-p.Row,0),rotation,pipeContainer);
+            PipeClick pipeClick = pipe.GetComponent<PipeClick>();
+            bool isLight = false;
+            if(p.TypeOfPipe == PipeType.light)
+                isLight = true;
+            pipeClick.DefinePipe(p,this,isLight);
         }
     }
 

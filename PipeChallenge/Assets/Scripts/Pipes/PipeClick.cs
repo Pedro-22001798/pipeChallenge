@@ -5,25 +5,18 @@ using UnityEngine;
 public class PipeClick : MonoBehaviour
 {
     public IPipe Pipe {get; private set;}
-    [SerializeField] private View view;
+    private View view;
     private SpriteRenderer sr;
-    [SerializeField] private bool isLight;
+    private bool isLight;
     private bool isRotating;
 
-    void Start()
-    {
-        sr = GetComponent<SpriteRenderer>();
-        if(isLight)
-            sr.color = Color.red;
-        else
-            sr.color = Color.white;
-    }
-
-    public void DefinePipe(IPipe pipe, View view)
+    public void DefinePipe(IPipe pipe, View view, bool isLight)
     {
         this.Pipe = pipe;
         this.view = view;
+        this.isLight = isLight;
         sr = GetComponent<SpriteRenderer>();
+        ChangeColor(isLight);
     }
 
     public void RotatePipe()
@@ -50,7 +43,7 @@ public class PipeClick : MonoBehaviour
         if(!isLight)
         {
             isLight = true;
-            sr.color = Color.red;
+            ChangeColor(isLight);
         }
     }
 
@@ -63,8 +56,16 @@ public class PipeClick : MonoBehaviour
         if(isLight)
         {
             isLight = false;
-            sr.color = Color.white;
+            ChangeColor(isLight);
         }
+    }
+
+    public void ChangeColor(bool light)
+    {
+        if(light)
+            sr.color = Color.red;
+        else
+            sr.color = Color.white;
     }
 
     public void AllowRotation()

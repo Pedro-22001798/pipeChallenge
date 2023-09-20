@@ -30,8 +30,8 @@ public class PipeClick : MonoBehaviour
     {
         if(!isRotating)
         {
-            Debug.Log("teste2");
             view.RotatePipe(this.transform,this);
+            isRotating = true;
         }
     }
 

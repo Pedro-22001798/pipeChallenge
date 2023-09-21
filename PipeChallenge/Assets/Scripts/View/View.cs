@@ -8,20 +8,28 @@ public class View : MonoBehaviour, IView
     [SerializeField] private Transform pipeContainer;
     [SerializeField] private GameObject[] pipePrefabs;
     [SerializeField] private TextMeshProUGUI currentLevelText;
+    [SerializeField] private CameraController cameraController;
 
     public void BuildLevel(ILevel level)
     {
         currentLevelText.text = $"{level.LevelNumber}#";
         List<IPipe> allPipes = level.GetAllPipes();
         ClearLevel();
-        foreach(IPipe p in allPipes)
+        int gridSizeX = 0, gridSizeY = 0;
+
+        foreach (IPipe p in allPipes)
         {
+            gridSizeX = Mathf.Max(gridSizeX, p.Row);
+            gridSizeY = Mathf.Max(gridSizeY, p.Col);
             Quaternion rotation = Quaternion.Euler(0, 0, p.Rotation);
-            GameObject pipe = Instantiate(GetPipePrefab(p.TypeOfPipe),new Vector3(p.Col,-p.Row,0),rotation,pipeContainer);
+            GameObject pipe = Instantiate(GetPipePrefab(p.TypeOfPipe), new Vector3(p.Col, -p.Row, 0), rotation, pipeContainer);
             PipeClick pipeClick = pipe.GetComponent<PipeClick>();
-            pipeClick.DefinePipe(p,this);
+            pipeClick.DefinePipe(p, this);
         }
+
+        cameraController.CalculateCameraPosition(gridSizeX, gridSizeY);
     }
+
 
     public void LightPipe()
     {

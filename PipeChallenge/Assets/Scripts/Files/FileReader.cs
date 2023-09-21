@@ -33,11 +33,11 @@ public class FileReader : MonoBehaviour
                     IPipe pipe;
                     if (typeOfPipe == PipeType.light)
                     {
-                        pipe = new Pipe(true, typeOfPipe,rotation,row,actualCol);
+                        pipe = new Pipe(true, typeOfPipe,rotation,row+1,actualCol);
                     }
                     else
                     {
-                        pipe = new Pipe(false, typeOfPipe,rotation,row,actualCol);
+                        pipe = new Pipe(false, typeOfPipe,rotation,row+1,actualCol);
                     }
 
                     allPipes.Add(pipe);

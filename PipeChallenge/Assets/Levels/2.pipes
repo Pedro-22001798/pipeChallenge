@@ -1,3 +1,5 @@
-light,0,end,90,curve,180
-end,270,end,0,end,90
-curve,90,normal,180,light,270
+light,0,end,90,curve,180,normal,180,light,270
+end,270,end,0,end,90,normal,180,light,270
+curve,90,normal,180,light,270,normal,180,light,270
+light,0,end,90,curve,180,normal,180,light,270
+end,270,end,0,end,90,normal,180,light,270

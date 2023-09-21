@@ -12,4 +12,7 @@ public interface IPipe
 
     void LightPipe();
     void UnlightPipe();
+
+    void DefineConnections(List<IPipe> connections);
+    List<IPipe> GetConnections();
 }

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public interface IView
 {
-    void LightPipe();
+    void BuildLevel(ILevel level);
+    void LightPipe(SpriteRenderer sr);
+    void UnlightPipe(SpriteRenderer sr);
     void RotatePipe(Transform pipeTransform, PipeClick pipe);
+    void ClearLevel();
 }

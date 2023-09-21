@@ -9,6 +9,8 @@ public class View : MonoBehaviour, IView
     [SerializeField] private GameObject[] pipePrefabs;
     [SerializeField] private TextMeshProUGUI currentLevelText;
     [SerializeField] private CameraController cameraController;
+    [SerializeField] private Material[] pipeMaterials;
+    [SerializeField] private ConnectionsController connectionsController;
 
     public void BuildLevel(ILevel level)
     {
@@ -26,14 +28,18 @@ public class View : MonoBehaviour, IView
             PipeClick pipeClick = pipe.GetComponent<PipeClick>();
             pipeClick.DefinePipe(p, this);
         }
-
         cameraController.CalculateCameraPosition(gridSizeX, gridSizeY);
     }
 
 
-    public void LightPipe()
+    public void LightPipe(SpriteRenderer sr)
     {
+        sr.material = pipeMaterials[1];
+    }
 
+    public void UnlightPipe(SpriteRenderer sr)
+    {
+        sr.material = pipeMaterials[0];
     }
 
     public void RotatePipe(Transform pipeTransform, PipeClick pipe)
@@ -57,6 +63,7 @@ public class View : MonoBehaviour, IView
         // Ensure the rotation is exact at the end
         pipeTransform.rotation = targetRotation;
         pipe.AllowRotation();
+        connectionsController.CheckConnections();
     }
 
     public void ClearLevel()

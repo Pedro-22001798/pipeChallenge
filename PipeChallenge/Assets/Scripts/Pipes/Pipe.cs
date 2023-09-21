@@ -9,6 +9,7 @@ public class Pipe : IPipe
     public float Rotation {get; private set;}
     public int Row {get; private set;}
     public int Col {get; private set;}
+    private List<IPipe> allConnections;
 
     public Pipe(bool isLight, PipeType typeOfPipe, float rotation, int row, int col)
     {
@@ -17,6 +18,7 @@ public class Pipe : IPipe
         this.Rotation = rotation;
         this.Row = row;
         this.Col = col;
+        allConnections = new List<IPipe>();
     }
 
     public void RotatePipe()
@@ -32,5 +34,15 @@ public class Pipe : IPipe
     public void UnlightPipe()
     {
         IsLight = false;
+    }
+
+    public void DefineConnections(List<IPipe> connections)
+    {
+        allConnections = connections;
+    }
+
+    public List<IPipe> GetConnections()
+    {
+        return allConnections;
     }
 }

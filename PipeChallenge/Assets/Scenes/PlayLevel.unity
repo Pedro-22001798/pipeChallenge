@@ -630,6 +630,10 @@ MonoBehaviour:
   - {fileID: 3715576686547826999, guid: 78607cd1973782e48a581550a999b6ab, type: 3}
   currentLevelText: {fileID: 2073378316}
   cameraController: {fileID: 717941606}
+  pipeMaterials:
+  - {fileID: 2100000, guid: 93839736104a7614c9cd73f414b2bf57, type: 2}
+  - {fileID: 2100000, guid: ff802fc112916514a8559a925f180e60, type: 2}
+  connectionsController: {fileID: 2120485211}
 --- !u!4 &232459830
 Transform:
   m_ObjectHideFlags: 0
@@ -1787,6 +1791,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc548f5f44145764fbe21cb4b997dd9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  connectionsController: {fileID: 2120485211}
 --- !u!4 &1339776300
 Transform:
   m_ObjectHideFlags: 0
@@ -2301,6 +2306,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2073378313}
   m_CullTransparentMesh: 1
+--- !u!1 &2120485210
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2120485212}
+  - component: {fileID: 2120485211}
+  m_Layer: 0
+  m_Name: Connection Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2120485211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120485210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82323fb53f9049343bfe50574ce447d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelController: {fileID: 1339776299}
+--- !u!4 &2120485212
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120485210}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.9, y: -0.9, z: 0.024999972}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2139589753
 GameObject:
   m_ObjectHideFlags: 0

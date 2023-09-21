@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class LevelController : MonoBehaviour
 {
+    [SerializeField] private ConnectionsController connectionsController;
     private List<IPipe> allEndingPipes = new List<IPipe>();
+    private ILevel currentLevel;
 
     public void LoadNewLevel(ILevel level)
     {
+        currentLevel = level;
         allEndingPipes = new List<IPipe>();
         allEndingPipes = level.GetAllEndingPipes();
+        connectionsController.DefineLevel(currentLevel);
     }
 
     public bool CheckIfLevelWon()
@@ -22,5 +26,10 @@ public class LevelController : MonoBehaviour
             }
         }
         return true;
+    }
+
+    public ILevel GetCurrentLevel()
+    {
+        return currentLevel;
     }
 }

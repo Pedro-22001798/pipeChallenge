@@ -32,7 +32,7 @@ public class Level : ILevel
         foreach(IPipe p in allPipes)
         {
             if(p.TypeOfPipe == PipeType.end)
-                allPipes.Add(p);
+                endPipes.Add(p);
         }
 
         return endPipes;

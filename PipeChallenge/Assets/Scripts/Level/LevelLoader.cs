@@ -23,6 +23,7 @@ public class LevelLoader : MonoBehaviour
         allStringLevels = fileDetection.GetLevelFiles();
         BuildAllLevels();
         LoadNewLevel(CurrentLevel);
+        levelController.LoadNewLevel(allLevels.GetLevel(CurrentLevel));
     }
 
     public void LoadNewLevel(int levelNumber)

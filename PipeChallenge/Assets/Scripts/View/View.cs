@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class View : MonoBehaviour, IView
 {
     [SerializeField] private Transform pipeContainer;
     [SerializeField] private GameObject[] pipePrefabs;
+    [SerializeField] private TextMeshProUGUI currentLevelText;
 
     public void BuildLevel(ILevel level)
     {
+        currentLevelText.text = $"{level.LevelNumber}#";
         List<IPipe> allPipes = level.GetAllPipes();
         ClearLevel();
         foreach(IPipe p in allPipes)
@@ -52,7 +55,7 @@ public class View : MonoBehaviour, IView
     {
         foreach(Transform t in pipeContainer)
         {
-            Destroy(t);
+            Destroy(t.gameObject);
         }
     }
 

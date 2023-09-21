@@ -4,21 +4,15 @@ using UnityEngine;
 
 public class Program : MonoBehaviour
 {
-    private FileDetection fileDetection;
-    private LevelLoader levelLoader;
-    private LevelController levelController;
-    private FileReader fileReader;
-    private AllLevels allLevels;
-    private View view;
+    [SerializeField] private FileDetection fileDetection;
+    [SerializeField] private LevelLoader levelLoader;
+    [SerializeField] private LevelController levelController;
+    [SerializeField] private FileReader fileReader;
+    [SerializeField] private AllLevels allLevels;
+    [SerializeField] private View view;
 
     void Start()
     {
-        levelLoader = GetComponent<LevelLoader>();
-        levelController = GetComponent<LevelController>();
-        fileDetection = GetComponent<FileDetection>();
-        allLevels = GetComponent<AllLevels>();
-        fileReader = GetComponent<FileReader>();
-        view = GetComponent<View>();
         fileReader.StartGame(allLevels,view);
         levelLoader.StartGame(levelController,fileDetection,fileReader,allLevels, view);
     }

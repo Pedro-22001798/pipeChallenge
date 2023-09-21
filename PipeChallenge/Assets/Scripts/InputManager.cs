@@ -13,16 +13,19 @@ public class InputManager : MonoBehaviour
             Vector2 mousePosition2D = new Vector2(mousePosition.x, mousePosition.y);
             RaycastHit2D hit = Physics2D.Raycast(mousePosition2D, Vector2.zero);
 
-            if(hit.collider.gameObject.tag == "NormalPipe" || hit.collider.gameObject.tag == "CurvePipe")
+            if(hit == true)
             {
-                // Check if the object has a PipeClick component
-                PipeClick pipeClick = hit.collider.GetComponent<PipeClick>();
-                if (pipeClick != null)
+                if(hit.collider.tag == "NormalPipe" || hit.collider.tag == "CurvePipe")
                 {
-                    pipeClick.RotatePipe();
-                    if(levelController.CheckIfLevelWon())
+                    // Check if the object has a PipeClick component
+                    PipeClick pipeClick = hit.collider.GetComponent<PipeClick>();
+                    if (pipeClick != null)
                     {
-                        Debug.Log("level won");
+                        pipeClick.RotatePipe();
+                        if(levelController.CheckIfLevelWon())
+                        {
+                            Debug.Log("level won");
+                        }
                     }
                 }
             }

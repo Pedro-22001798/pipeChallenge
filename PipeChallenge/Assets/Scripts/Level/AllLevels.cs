@@ -21,26 +21,32 @@ public class AllLevels : MonoBehaviour
 
     public void NextLevel()
     {
-        if(canPassLevel)
+        if(GameStateMachine.Instance.CurrentGameState == GameState.paused)
         {
-            if(!IsLevelLocked(levelLoader.CurrentLevel+1))
+            if(canPassLevel)
             {
-                canPassLevel = false;
-                view.LevelTransition();
-                StartCoroutine(LoadAndChangeLevel(levelLoader.CurrentLevel+1));
+                if(!IsLevelLocked(levelLoader.CurrentLevel+1))
+                {
+                    canPassLevel = false;
+                    view.LevelTransition();
+                    StartCoroutine(LoadAndChangeLevel(levelLoader.CurrentLevel+1));
+                }
             }
         }
     }
 
     public void PreviousLevel()
     {
-        if(canPassLevel)
+        if(GameStateMachine.Instance.CurrentGameState == GameState.paused)
         {
-            if(levelLoader.CurrentLevel > 0)
+            if(canPassLevel)
             {
-                canPassLevel = false;
-                view.LevelTransition();
-                StartCoroutine(LoadAndChangeLevel(levelLoader.CurrentLevel-1));
+                if(levelLoader.CurrentLevel > 0)
+                {
+                    canPassLevel = false;
+                    view.LevelTransition();
+                    StartCoroutine(LoadAndChangeLevel(levelLoader.CurrentLevel-1));
+                }
             }
         }
     }

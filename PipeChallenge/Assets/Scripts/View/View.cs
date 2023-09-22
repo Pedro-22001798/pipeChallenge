@@ -7,12 +7,13 @@ public class View : MonoBehaviour, IView
 {
     [SerializeField] private Transform pipeContainer;
     [SerializeField] private GameObject[] pipePrefabs;
-    [SerializeField] private TextMeshProUGUI currentLevelText;
+    [SerializeField] private TextMeshProUGUI currentLevelText, playerScoreText;
     [SerializeField] private CameraController cameraController;
     [SerializeField] private Material[] pipeMaterials;
     [SerializeField] private ConnectionsController connectionsController;
     [SerializeField] private LevelController levelController;
     [SerializeField] private Animator levelTransitor;
+    [SerializeField] private Camera mainCamera;
 
     public void BuildLevel(ILevel level)
     {
@@ -136,8 +137,42 @@ public class View : MonoBehaviour, IView
         return pipePrefabs[0];
     }
 
+    public void PauseGame()
+    {
+        float currentSize = mainCamera.orthographicSize;
+        float newSize = currentSize + 2f;
+        StartCoroutine(LerpCameraSize(newSize,0.5f));
+    }
+
+    public void ResumeGame()
+    {
+        float currentSize = mainCamera.orthographicSize;
+        float newSize = currentSize - 2f;
+        StartCoroutine(LerpCameraSize(newSize,0.5f));      
+    }
+
     public void LevelTransition()
     {
         levelTransitor.SetTrigger("PassLevel");
+    }
+
+    public void UpdateScoreText(int score)
+    {
+        playerScoreText.text = $"Score = {score}";
+    }
+
+    private IEnumerator LerpCameraSize(float targetSize, float lerpDuration)
+    {
+        float elapsedTime = 0f;
+        float startSize = mainCamera.orthographicSize;
+
+        while (elapsedTime < lerpDuration)
+        {
+            mainCamera.orthographicSize = Mathf.Lerp(startSize, targetSize, elapsedTime / lerpDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        mainCamera.orthographicSize = targetSize;
     }
 }

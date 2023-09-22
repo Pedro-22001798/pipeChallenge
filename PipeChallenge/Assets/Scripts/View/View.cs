@@ -12,7 +12,7 @@ public class View : MonoBehaviour, IView
     [SerializeField] private Material[] pipeMaterials;
     [SerializeField] private ConnectionsController connectionsController;
     [SerializeField] private LevelController levelController;
-    [SerializeField] private Animator levelTransitor;
+    [SerializeField] private Animator levelTransitor, endTextAnimator, endBackgroundAnimator;
     [SerializeField] private Camera mainCamera;
     bool isLerping = false;
 
@@ -35,6 +35,7 @@ public class View : MonoBehaviour, IView
         cameraController.CalculateCameraPosition(gridSizeX, gridSizeY);
         connectionsController.DefinePipes();
         connectionsController.CheckConnections();
+        GameStateMachine.Instance.ResumeGame();
     }
 
 
@@ -196,6 +197,8 @@ public class View : MonoBehaviour, IView
                 sr.Add(sr2);
             }
         }
+        endBackgroundAnimator.SetTrigger("WinLevel");
+        endTextAnimator.SetTrigger("WinLevel");
         StartCoroutine(LerpEndPipesMaterials(sr,0.5f));
     }
 

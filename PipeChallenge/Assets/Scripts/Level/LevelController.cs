@@ -5,6 +5,7 @@ using UnityEngine;
 public class LevelController : MonoBehaviour
 {
     [SerializeField] private LevelLoader levelLoader;
+    [SerializeField] private AllLevels allLevels;
     private List<IPipe> allEndingPipes = new List<IPipe>();
     private ILevel currentLevel;
     [SerializeField] private PlayerScore playerScore;
@@ -43,10 +44,18 @@ public class LevelController : MonoBehaviour
             currentLevel.PassLevel();
             levelLoader.UnlockNextLevel();
         }
+        GameStateMachine.Instance.PauseGame();
+        StartCoroutine(GoNextLevel());
     }
 
     public bool IsLevelPassed()
     {
         return currentLevel.IsPassed;
+    }
+
+    private IEnumerator GoNextLevel()
+    {
+        yield return new WaitForSeconds(2.5f);
+        allLevels.NextLevel();
     }
 }

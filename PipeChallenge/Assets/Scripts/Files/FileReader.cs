@@ -43,7 +43,11 @@ public class FileReader : MonoBehaviour
                     allPipes.Add(pipe);
                 }
             }
-            ILevel newLevel = new Level(currentLevel,allPipes);
+            ILevel newLevel;
+            if(currentLevel == 0)
+                newLevel = new Level(currentLevel,allPipes);
+            else
+                newLevel = new Level(currentLevel,allPipes,false,true);
             allLevels.CreateLevel(newLevel);
             return newLevel;
         }

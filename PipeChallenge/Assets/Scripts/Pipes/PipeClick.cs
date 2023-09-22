@@ -20,12 +20,19 @@ public class PipeClick : MonoBehaviour
             view.LightPipe(sr);
     }
 
-    public void RotatePipe()
+    public void RotatePipe(bool isBlock = false)
     {
         if(!isRotating)
         {
-            view.RotatePipe(this.transform,this);
-            Pipe.RotatePipe();
+            if(!isBlock)
+            {
+                view.RotatePipe(this.transform,this);
+                Pipe.RotatePipe();
+            }
+            else
+            {
+                view.BlockRotation(this.transform,this);
+            }
             isRotating = true;
         }
     }

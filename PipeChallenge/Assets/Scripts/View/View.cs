@@ -12,6 +12,7 @@ public class View : MonoBehaviour, IView
     [SerializeField] private Material[] pipeMaterials;
     [SerializeField] private ConnectionsController connectionsController;
     [SerializeField] private LevelController levelController;
+    [SerializeField] private Animator levelTransitor;
 
     public void BuildLevel(ILevel level)
     {
@@ -51,6 +52,11 @@ public class View : MonoBehaviour, IView
         StartCoroutine(RotatePipeCoroutine(pipeTransform,pipe));
     }
 
+    public void BlockRotation(Transform pipeTransform, PipeClick pipe)
+    {
+        StartCoroutine(BlockRotationAnimation(pipeTransform,pipe));
+    }
+
     private IEnumerator RotatePipeCoroutine(Transform pipeTransform, PipeClick pipe)
     {
         float elapsedTime = 0f;
@@ -66,6 +72,42 @@ public class View : MonoBehaviour, IView
 
         // Ensure the rotation is exact at the end
         pipeTransform.rotation = targetRotation;
+        pipe.AllowRotation();
+    }
+
+    private IEnumerator BlockRotationAnimation(Transform pipeTransform, PipeClick pipe)
+    {
+        Quaternion originalRotation = pipeTransform.rotation;
+        Quaternion targetRotation = originalRotation * Quaternion.Euler(0, 0, 15f);
+
+        float rotationDuration = 0.1f;
+        float returnDuration = 0.05f;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < rotationDuration)
+        {
+            pipeTransform.rotation = Quaternion.Slerp(originalRotation, targetRotation, elapsedTime / rotationDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure the rotation ends exactly at the target rotation
+        pipeTransform.rotation = targetRotation;
+
+        // Wait for a short duration
+        yield return new WaitForSeconds(returnDuration);
+
+        // Return to the original rotation
+        elapsedTime = 0f;
+        while (elapsedTime < returnDuration)
+        {
+            pipeTransform.rotation = Quaternion.Slerp(targetRotation, originalRotation, elapsedTime / returnDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure the rotation ends exactly at the original rotation
+        pipeTransform.rotation = originalRotation;
         pipe.AllowRotation();
     }
 
@@ -92,5 +134,10 @@ public class View : MonoBehaviour, IView
         }
 
         return pipePrefabs[0];
+    }
+
+    public void LevelTransition()
+    {
+        levelTransitor.SetTrigger("PassLevel");
     }
 }

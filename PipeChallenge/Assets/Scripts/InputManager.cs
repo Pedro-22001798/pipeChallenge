@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-
+    [SerializeField] private View view;
     private void Update()
     {
         // Check for mouse left-click
@@ -14,13 +14,21 @@ public class InputManager : MonoBehaviour
 
             if(hit == true)
             {
-                if(hit.collider.tag == "NormalPipe" || hit.collider.tag == "CurvePipe")
+                if(hit.collider.tag == "NormalPipe" || hit.collider.tag == "CurvePipe" || hit.collider.tag == "EndPipe")
                 {
                     // Check if the object has a PipeClick component
                     PipeClick pipeClick = hit.collider.GetComponent<PipeClick>();
                     if (pipeClick != null)
                     {
                         pipeClick.RotatePipe();
+                    }
+                }
+                else if(hit.collider.tag == "LightPipe")
+                {
+                    PipeClick pipeClick = hit.collider.GetComponent<PipeClick>();
+                    if (pipeClick != null)
+                    {
+                        pipeClick.RotatePipe(true);
                     }
                 }
             }

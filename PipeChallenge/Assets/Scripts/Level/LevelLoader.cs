@@ -42,4 +42,11 @@ public class LevelLoader : MonoBehaviour
     {
         CurrentLevel = newNumLevel;
     }
+
+    public void UnlockNextLevel()
+    {
+        ILevel level = allLevels.GetLevel(CurrentLevel+1);
+        level.UnlockLevel();
+        
+    }
 }

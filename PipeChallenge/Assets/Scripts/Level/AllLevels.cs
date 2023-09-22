@@ -6,6 +6,7 @@ public class AllLevels : MonoBehaviour
 {
     List<ILevel> allLevels = new List<ILevel>();
     [SerializeField] private LevelLoader levelLoader;
+    [SerializeField] private View view;
 
     public void CreateLevel(ILevel newLevel)
     {
@@ -21,8 +22,8 @@ public class AllLevels : MonoBehaviour
     {
         if(!IsLevelLocked(levelLoader.CurrentLevel+1))
         {
-            levelLoader.LoadNewLevel(levelLoader.CurrentLevel+1);
-            levelLoader.ChangeLevel(levelLoader.CurrentLevel+1);
+            view.LevelTransition();
+            StartCoroutine(LoadAndChangeLevel(levelLoader.CurrentLevel+1));
         }
     }
 
@@ -30,13 +31,20 @@ public class AllLevels : MonoBehaviour
     {
         if(levelLoader.CurrentLevel > 0)
         {
-            levelLoader.LoadNewLevel(levelLoader.CurrentLevel-1);
-            levelLoader.ChangeLevel(levelLoader.CurrentLevel-1);
+            view.LevelTransition();
+            StartCoroutine(LoadAndChangeLevel(levelLoader.CurrentLevel-1));
         }
     }
 
     public ILevel GetLevel(int numLevel)
     {
         return allLevels[numLevel];
+    }
+
+    private IEnumerator LoadAndChangeLevel(int level)
+    {
+        yield return new WaitForSeconds(0.3f);
+        levelLoader.LoadNewLevel(level);
+        levelLoader.ChangeLevel(level);        
     }
 }

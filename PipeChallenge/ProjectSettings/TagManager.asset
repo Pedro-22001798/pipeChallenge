@@ -7,6 +7,8 @@ TagManager:
   - NormalPipe
   - CurvePipe
   - ConnectionsController
+  - EndPipe
+  - LightPipe
   layers:
   - Default
   - TransparentFX

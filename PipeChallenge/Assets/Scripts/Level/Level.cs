@@ -9,16 +9,22 @@ public class Level : ILevel
     public bool IsLocked {get; private set;}
     public bool IsPassed {get; private set;}
 
-    public Level(int levelNumber, List<IPipe> allPipes, bool isPassed = false)
+    public Level(int levelNumber, List<IPipe> allPipes, bool isPassed = false, bool isLocked = true)
     {
         this.LevelNumber = levelNumber;
         this.allPipes = allPipes;
         this.IsPassed = isPassed;
+        this.IsLocked = isLocked;
     }
 
     public void UnlockLevel()
     {
         IsLocked = false;
+    }
+
+    public void PassLevel()
+    {
+        IsPassed = true;
     }
 
     public List<IPipe> GetAllPipes()

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LevelController : MonoBehaviour
 {
+    [SerializeField] private LevelLoader levelLoader;
     private List<IPipe> allEndingPipes = new List<IPipe>();
     private ILevel currentLevel;
 
@@ -29,5 +30,16 @@ public class LevelController : MonoBehaviour
     public ILevel GetCurrentLevel()
     {
         return currentLevel;
+    }
+
+    public void PassLevel()
+    {
+        currentLevel.PassLevel();
+        levelLoader.UnlockNextLevel();
+    }
+
+    public bool IsLevelPassed()
+    {
+        return currentLevel.IsPassed;
     }
 }

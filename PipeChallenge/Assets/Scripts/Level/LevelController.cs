@@ -37,9 +37,12 @@ public class LevelController : MonoBehaviour
     public void PassLevel()
     {
         view.WinLevel();
-        playerScore.AddScore(1);
-        currentLevel.PassLevel();
-        levelLoader.UnlockNextLevel();
+        if(!currentLevel.IsPassed)
+        {
+            playerScore.AddScore(1);
+            currentLevel.PassLevel();
+            levelLoader.UnlockNextLevel();
+        }
     }
 
     public bool IsLevelPassed()

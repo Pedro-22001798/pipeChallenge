@@ -20,8 +20,6 @@ public class ConnectionsController : MonoBehaviour
 
     public void CheckConnections()
     {
-        if(!levelController.IsLevelPassed())
-        {
             foreach(PipeClick pc in allPipes)
             {
                 if(pc.Pipe.TypeOfPipe != PipeType.light)
@@ -61,5 +59,4 @@ public class ConnectionsController : MonoBehaviour
                 levelController.PassLevel();
             }
         }
-    }
 }

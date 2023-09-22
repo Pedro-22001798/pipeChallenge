@@ -24,7 +24,8 @@ public class Level : ILevel
 
     public void PassLevel()
     {
-        IsPassed = true;
+        if(!IsPassed)
+            IsPassed = true;
     }
 
     public List<IPipe> GetAllPipes()

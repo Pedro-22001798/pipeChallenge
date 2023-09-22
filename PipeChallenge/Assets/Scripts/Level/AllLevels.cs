@@ -7,6 +7,7 @@ public class AllLevels : MonoBehaviour
     List<ILevel> allLevels = new List<ILevel>();
     [SerializeField] private LevelLoader levelLoader;
     [SerializeField] private View view;
+    private bool canPassLevel = true;
 
     public void CreateLevel(ILevel newLevel)
     {
@@ -20,19 +21,27 @@ public class AllLevels : MonoBehaviour
 
     public void NextLevel()
     {
-        if(!IsLevelLocked(levelLoader.CurrentLevel+1))
+        if(canPassLevel)
         {
-            view.LevelTransition();
-            StartCoroutine(LoadAndChangeLevel(levelLoader.CurrentLevel+1));
+            if(!IsLevelLocked(levelLoader.CurrentLevel+1))
+            {
+                canPassLevel = false;
+                view.LevelTransition();
+                StartCoroutine(LoadAndChangeLevel(levelLoader.CurrentLevel+1));
+            }
         }
     }
 
     public void PreviousLevel()
     {
-        if(levelLoader.CurrentLevel > 0)
+        if(canPassLevel)
         {
-            view.LevelTransition();
-            StartCoroutine(LoadAndChangeLevel(levelLoader.CurrentLevel-1));
+            if(levelLoader.CurrentLevel > 0)
+            {
+                canPassLevel = false;
+                view.LevelTransition();
+                StartCoroutine(LoadAndChangeLevel(levelLoader.CurrentLevel-1));
+            }
         }
     }
 
@@ -45,6 +54,7 @@ public class AllLevels : MonoBehaviour
     {
         yield return new WaitForSeconds(0.3f);
         levelLoader.LoadNewLevel(level);
-        levelLoader.ChangeLevel(level);        
+        levelLoader.ChangeLevel(level);  
+        canPassLevel = true;      
     }
 }

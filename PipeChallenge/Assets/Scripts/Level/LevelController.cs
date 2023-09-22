@@ -7,6 +7,7 @@ public class LevelController : MonoBehaviour
     [SerializeField] private LevelLoader levelLoader;
     private List<IPipe> allEndingPipes = new List<IPipe>();
     private ILevel currentLevel;
+    [SerializeField] private PlayerScore playerScore;
 
     public void LoadNewLevel(ILevel level)
     {
@@ -34,6 +35,7 @@ public class LevelController : MonoBehaviour
 
     public void PassLevel()
     {
+        playerScore.AddScore(1);
         currentLevel.PassLevel();
         levelLoader.UnlockNextLevel();
     }

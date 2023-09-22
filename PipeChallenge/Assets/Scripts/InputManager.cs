@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    [SerializeField] private View view;
+    [SerializeField] private CameraShake cameraShake;
 
     private void Update()
     {
@@ -32,6 +32,7 @@ public class InputManager : MonoBehaviour
                         if (pipeClick != null)
                         {
                             pipeClick.RotatePipe(true);
+                            cameraShake.ShakeCamera();
                         }
                     }
                 }

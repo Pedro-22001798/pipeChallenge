@@ -47,6 +47,5 @@ public class LevelLoader : MonoBehaviour
     {
         ILevel level = allLevels.GetLevel(CurrentLevel+1);
         level.UnlockLevel();
-        
     }
 }

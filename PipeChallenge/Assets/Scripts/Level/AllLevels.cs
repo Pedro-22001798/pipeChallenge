@@ -7,6 +7,7 @@ public class AllLevels : MonoBehaviour
     List<ILevel> allLevels = new List<ILevel>();
     [SerializeField] private LevelLoader levelLoader;
     [SerializeField] private View view;
+    [SerializeField] private CameraShake cameraShake;
     private bool canPassLevel = true;
 
     public void CreateLevel(ILevel newLevel)
@@ -31,6 +32,10 @@ public class AllLevels : MonoBehaviour
                     view.LevelTransition();
                     StartCoroutine(LoadAndChangeLevel(levelLoader.CurrentLevel+1));
                 }
+                else
+                {
+                    cameraShake.ShakeCamera();
+                }
             }
         }
     }
@@ -46,6 +51,10 @@ public class AllLevels : MonoBehaviour
                     canPassLevel = false;
                     view.LevelTransition();
                     StartCoroutine(LoadAndChangeLevel(levelLoader.CurrentLevel-1));
+                }
+                else
+                {
+                    cameraShake.ShakeCamera();
                 }
             }
         }

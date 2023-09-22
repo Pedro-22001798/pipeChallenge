@@ -175,4 +175,40 @@ public class View : MonoBehaviour, IView
 
         mainCamera.orthographicSize = targetSize;
     }
+
+    public void WinLevel()
+    {
+        List<SpriteRenderer> sr = new List<SpriteRenderer>();
+        foreach(Transform t in pipeContainer)
+        {
+            PipeClick pc = t.GetComponent<PipeClick>();
+            if(pc.Pipe.TypeOfPipe == PipeType.end)
+            {
+                SpriteRenderer sr2 = t.GetComponent<SpriteRenderer>();
+                sr.Add(sr2);
+            }
+        }
+        StartCoroutine(LerpEndPipesMaterials(sr,0.5f));
+    }
+
+    private IEnumerator LerpEndPipesMaterials(List<SpriteRenderer> allEndPipes, float lerpDuration)
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < lerpDuration)
+        {
+            float t = elapsedTime / lerpDuration;
+            foreach(SpriteRenderer sr in allEndPipes)
+            {
+                sr.material.Lerp(pipeMaterials[1], pipeMaterials[2], t);
+            }
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        foreach(SpriteRenderer sr in allEndPipes)
+        {
+            sr.material = pipeMaterials[2];
+        }
+    }
 }

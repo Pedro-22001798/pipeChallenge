@@ -23,38 +23,38 @@ public class ConnectionsController : MonoBehaviour
             PipeClick pc = t.GetComponent<PipeClick>();
             allPipes.Add(pc);
         }
-        
+
         foreach(PipeClick pc in allPipes)
         {
-            if(pc.Pipe.TypeOfPipe != PipeType.light && pc.Pipe.TypeOfPipe != PipeType.end)
+            if(pc.Pipe.TypeOfPipe != PipeType.light)
+                pc.UnlightPipe();
+        }
+
+        foreach(PipeClick pc in allPipes)
+        {
+            List<PipeClick> allConnections = new List<PipeClick>();
+            allConnections = pc.GetPipeConnections();
+            if(allConnections.Count > 0)
             {
-                List<PipeClick> allConnections = new List<PipeClick>();
-                allConnections = pc.GetPipeConnections();
-                if(allConnections.Count > 0)
+                foreach(PipeClick pc2 in allConnections)
                 {
-                    foreach(PipeClick pc2 in allConnections)
+                    if(pc2.Pipe.TypeOfPipe == PipeType.light)
+                    {
+                        pc.LightPipe();
+                    }
+                    else
                     {
                         if(pc2.IsLight())
                         {
                             pc.LightPipe();
                         }
-                        else
-                        {
-                            if(pc.IsLight())
-                            {
-                                pc2.LightPipe();
-                            }
-                            else
-                            {
-                                pc2.UnlightPipe();
-                            }
-                        }
                     }
                 }
-                else
-                {
+            }
+            else
+            {
+                if(pc.Pipe.TypeOfPipe != PipeType.light)
                     pc.UnlightPipe();
-                }
             }
         }
     }

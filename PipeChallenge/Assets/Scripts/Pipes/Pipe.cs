@@ -17,6 +17,7 @@ public class Pipe : IPipe
         this.IsLight = isLight;
         this.TypeOfPipe = typeOfPipe;
         this.StartRotation = rotation;
+        this.CurrentRotation = rotation;
         this.Row = row;
         this.Col = col;
         allConnections = new List<IPipe>();

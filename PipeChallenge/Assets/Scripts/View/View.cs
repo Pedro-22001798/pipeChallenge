@@ -14,7 +14,14 @@ public class View : MonoBehaviour, IView
     [SerializeField] private LevelController levelController;
     [SerializeField] private Animator levelTransitor, endTextAnimator, endBackgroundAnimator;
     [SerializeField] private Camera mainCamera;
+    [SerializeField] private Skin[] allSkins;
     bool isLerping = false;
+
+    [System.Serializable]
+    public class Skin
+    {
+        public Sprite[] skins;
+    }
 
     public void BuildLevel(ILevel level)
     {
@@ -220,6 +227,23 @@ public class View : MonoBehaviour, IView
         foreach(SpriteRenderer sr in allEndPipes)
         {
             sr.material = pipeMaterials[2];
+        }
+    }
+
+    public void ChangeSkin(SkinType skinType)
+    {
+        for(int i = 0; i < pipePrefabs.Length; i++)
+        {
+            SpriteRenderer sr = pipePrefabs[i].GetComponent<SpriteRenderer>();
+            switch(skinType)
+            {
+                case SkinType.triangular:
+                    sr.sprite = allSkins[1].skins[i];
+                    break;
+                default:
+                    sr.sprite = allSkins[0].skins[i];
+                    break;
+            }
         }
     }
 }

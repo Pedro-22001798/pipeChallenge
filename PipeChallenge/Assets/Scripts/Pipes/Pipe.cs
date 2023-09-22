@@ -6,7 +6,8 @@ public class Pipe : IPipe
 {
     public bool IsLight {get; private set;}
     public PipeType TypeOfPipe {get; private set;}
-    public float Rotation {get; private set;}
+    public float StartRotation {get; private set;}
+    public float CurrentRotation {get; private set;}
     public int Row {get; private set;}
     public int Col {get; private set;}
     private List<IPipe> allConnections;
@@ -15,7 +16,7 @@ public class Pipe : IPipe
     {
         this.IsLight = isLight;
         this.TypeOfPipe = typeOfPipe;
-        this.Rotation = rotation;
+        this.StartRotation = rotation;
         this.Row = row;
         this.Col = col;
         allConnections = new List<IPipe>();
@@ -23,7 +24,7 @@ public class Pipe : IPipe
 
     public void RotatePipe()
     {
-        Rotation += 90f;
+        CurrentRotation += 90f;
     }
 
     public void LightPipe()

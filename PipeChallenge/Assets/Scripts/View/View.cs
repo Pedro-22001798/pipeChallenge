@@ -26,7 +26,7 @@ public class View : MonoBehaviour, IView
         {
             gridSizeX = Mathf.Max(gridSizeX, p.Row);
             gridSizeY = Mathf.Max(gridSizeY, p.Col);
-            Quaternion rotation = Quaternion.Euler(0, 0, p.Rotation);
+            Quaternion rotation = Quaternion.Euler(0, 0, p.StartRotation);
             GameObject pipe = Instantiate(GetPipePrefab(p.TypeOfPipe), new Vector3(p.Col, -p.Row, 0), rotation, pipeContainer);
             PipeClick pipeClick = pipe.GetComponent<PipeClick>();
             pipeClick.DefinePipe(p, this);

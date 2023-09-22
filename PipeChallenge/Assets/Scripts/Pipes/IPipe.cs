@@ -6,7 +6,8 @@ public interface IPipe
 {
     bool IsLight {get;}
     PipeType TypeOfPipe {get;}
-    float Rotation {get;}
+    float StartRotation {get;}
+    float CurrentRotation {get;}
     int Row {get;}
     int Col {get;}
 

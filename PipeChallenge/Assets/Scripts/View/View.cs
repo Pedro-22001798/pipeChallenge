@@ -14,6 +14,7 @@ public class View : MonoBehaviour, IView
     [SerializeField] private LevelController levelController;
     [SerializeField] private Animator levelTransitor;
     [SerializeField] private Camera mainCamera;
+    bool isLerping = false;
 
     public void BuildLevel(ILevel level)
     {
@@ -138,16 +139,22 @@ public class View : MonoBehaviour, IView
 
     public void PauseGame()
     {
-        float currentSize = mainCamera.orthographicSize;
-        float newSize = currentSize + 2f;
-        StartCoroutine(LerpCameraSize(newSize,0.5f));
+        if(!isLerping)
+        {
+            float currentSize = mainCamera.orthographicSize;
+            float newSize = currentSize + 2f;
+            StartCoroutine(LerpCameraSize(newSize,0.5f));
+        }
     }
 
     public void ResumeGame()
     {
-        float currentSize = mainCamera.orthographicSize;
-        float newSize = currentSize - 2f;
-        StartCoroutine(LerpCameraSize(newSize,0.5f));      
+        if(!isLerping)
+        {
+            float currentSize = mainCamera.orthographicSize;
+            float newSize = currentSize - 2f;
+            StartCoroutine(LerpCameraSize(newSize,0.5f));  
+        }    
     }
 
     public void LevelTransition()
@@ -162,6 +169,7 @@ public class View : MonoBehaviour, IView
 
     private IEnumerator LerpCameraSize(float targetSize, float lerpDuration)
     {
+        isLerping = true;
         float elapsedTime = 0f;
         float startSize = mainCamera.orthographicSize;
 
@@ -173,6 +181,7 @@ public class View : MonoBehaviour, IView
         }
 
         mainCamera.orthographicSize = targetSize;
+        isLerping = false;
     }
 
     public void WinLevel()

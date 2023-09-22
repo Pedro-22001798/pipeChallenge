@@ -21,7 +21,6 @@ public class View : MonoBehaviour, IView
         List<IPipe> allPipes = level.GetAllPipes();
         ClearLevel();
         int gridSizeX = 0, gridSizeY = 0;
-
         foreach (IPipe p in allPipes)
         {
             gridSizeX = Mathf.Max(gridSizeX, p.Row);

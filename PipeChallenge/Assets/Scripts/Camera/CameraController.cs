@@ -31,10 +31,12 @@ public class CameraController : MonoBehaviour
         newSize = Mathf.Max(newSize, minSize);
 
         // Set the camera size directly to the new size
+        if(GameStateMachine.Instance.CurrentGameState == GameState.paused)
+            newSize += 2f;
         mainCamera.orthographicSize = newSize;
     }
 
-    private float CalculateCameraSize(int gridSizeX, int gridSizeY)
+    public float CalculateCameraSize(int gridSizeX, int gridSizeY)
     {
         // Calculate the camera size to fit the grid size with padding
         float gridSizeXWithPadding = gridSizeX + padding * 2;

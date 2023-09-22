@@ -70,6 +70,6 @@ public class AllLevels : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         levelLoader.LoadNewLevel(level);
         levelLoader.ChangeLevel(level);  
-        canPassLevel = true;      
+        canPassLevel = true;    
     }
 }

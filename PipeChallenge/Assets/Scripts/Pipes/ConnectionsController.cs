@@ -9,13 +9,7 @@ public class ConnectionsController : MonoBehaviour
     [SerializeField] private Transform allPipesTransfrom;
     private List<PipeClick> allPipes;
 
-    public void DefineLevel(ILevel newLevel)
-    {
-        currentLevel = levelController.GetCurrentLevel();
-        // allPipes = currentLevel.GetAllPipes();
-    }
-
-    public void CheckConnections()
+    public void DefinePipes()
     {
         allPipes = new List<PipeClick>();
         foreach(Transform t in allPipesTransfrom)
@@ -23,7 +17,10 @@ public class ConnectionsController : MonoBehaviour
             PipeClick pc = t.GetComponent<PipeClick>();
             allPipes.Add(pc);
         }
+    }
 
+    public void CheckConnections()
+    {
         foreach(PipeClick pc in allPipes)
         {
             if(pc.Pipe.TypeOfPipe != PipeType.light)
@@ -56,6 +53,11 @@ public class ConnectionsController : MonoBehaviour
                 if(pc.Pipe.TypeOfPipe != PipeType.light)
                     pc.UnlightPipe();
             }
+        }
+
+        if(levelController.CheckIfLevelWon())
+        {
+            Debug.Log("level won");
         }
     }
 }

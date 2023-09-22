@@ -25,6 +25,7 @@ public class PipeClick : MonoBehaviour
         if(!isRotating)
         {
             view.RotatePipe(this.transform,this);
+            Pipe.RotatePipe();
             isRotating = true;
         }
     }

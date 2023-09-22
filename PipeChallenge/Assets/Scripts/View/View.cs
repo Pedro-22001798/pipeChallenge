@@ -11,6 +11,7 @@ public class View : MonoBehaviour, IView
     [SerializeField] private CameraController cameraController;
     [SerializeField] private Material[] pipeMaterials;
     [SerializeField] private ConnectionsController connectionsController;
+    [SerializeField] private LevelController levelController;
 
     public void BuildLevel(ILevel level)
     {
@@ -28,7 +29,9 @@ public class View : MonoBehaviour, IView
             PipeClick pipeClick = pipe.GetComponent<PipeClick>();
             pipeClick.DefinePipe(p, this);
         }
+        levelController.LoadNewLevel(level);
         cameraController.CalculateCameraPosition(gridSizeX, gridSizeY);
+        connectionsController.DefinePipes();
         connectionsController.CheckConnections();
     }
 

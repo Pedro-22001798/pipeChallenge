@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    [SerializeField] private LevelController levelController;
 
     private void Update()
     {
@@ -22,10 +21,6 @@ public class InputManager : MonoBehaviour
                     if (pipeClick != null)
                     {
                         pipeClick.RotatePipe();
-                        if(levelController.CheckIfLevelWon())
-                        {
-                            Debug.Log("level won");
-                        }
                     }
                 }
             }

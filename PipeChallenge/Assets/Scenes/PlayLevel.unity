@@ -634,6 +634,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 93839736104a7614c9cd73f414b2bf57, type: 2}
   - {fileID: 2100000, guid: ff802fc112916514a8559a925f180e60, type: 2}
   connectionsController: {fileID: 2120485211}
+  levelController: {fileID: 1339776299}
 --- !u!4 &232459830
 Transform:
   m_ObjectHideFlags: 0
@@ -1791,7 +1792,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc548f5f44145764fbe21cb4b997dd9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectionsController: {fileID: 2120485211}
 --- !u!4 &1339776300
 Transform:
   m_ObjectHideFlags: 0
@@ -2155,7 +2155,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5236df337524fcc4caf61ce62829f72b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelController: {fileID: 1339776299}
 --- !u!4 &1950238222
 Transform:
   m_ObjectHideFlags: 0
@@ -2318,7 +2317,7 @@ GameObject:
   - component: {fileID: 2120485211}
   m_Layer: 0
   m_Name: Connection Controller
-  m_TagString: Untagged
+  m_TagString: ConnectionsController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

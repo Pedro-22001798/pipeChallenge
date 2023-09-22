@@ -10,6 +10,7 @@ public interface IPipe
     int Row {get;}
     int Col {get;}
 
+    void RotatePipe();
     void LightPipe();
     void UnlightPipe();
 

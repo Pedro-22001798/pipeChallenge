@@ -6,26 +6,54 @@ public class ConnectionsController : MonoBehaviour
 {
     [SerializeField] private LevelController levelController;
     private ILevel currentLevel;
-    List<IPipe> allPipes = new List<IPipe>();
+    [SerializeField] private Transform allPipesTransfrom;
+    private List<PipeClick> allPipes;
 
     public void DefineLevel(ILevel newLevel)
     {
         currentLevel = levelController.GetCurrentLevel();
-        allPipes = currentLevel.GetAllPipes();
-        CheckConnections();
+        // allPipes = currentLevel.GetAllPipes();
     }
 
     public void CheckConnections()
     {
-        foreach(IPipe p in allPipes)
+        allPipes = new List<PipeClick>();
+        foreach(Transform t in allPipesTransfrom)
         {
-            if(p.TypeOfPipe != PipeType.light && p.TypeOfPipe != PipeType.end)
+            PipeClick pc = t.GetComponent<PipeClick>();
+            allPipes.Add(pc);
+        }
+        
+        foreach(PipeClick pc in allPipes)
+        {
+            if(pc.Pipe.TypeOfPipe != PipeType.light && pc.Pipe.TypeOfPipe != PipeType.end)
             {
-                List<IPipe> allConnections = new List<IPipe>();
-                allConnections = p.GetConnections();
-                foreach(IPipe p2 in allConnections)
+                List<PipeClick> allConnections = new List<PipeClick>();
+                allConnections = pc.GetPipeConnections();
+                if(allConnections.Count > 0)
                 {
-                    
+                    foreach(PipeClick pc2 in allConnections)
+                    {
+                        if(pc2.IsLight())
+                        {
+                            pc.LightPipe();
+                        }
+                        else
+                        {
+                            if(pc.IsLight())
+                            {
+                                pc2.LightPipe();
+                            }
+                            else
+                            {
+                                pc2.UnlightPipe();
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    pc.UnlightPipe();
                 }
             }
         }

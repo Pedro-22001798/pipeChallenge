@@ -74,4 +74,15 @@ public class PipeClick : MonoBehaviour
     {
         return connections;
     }
+
+    public List<PipeClick> GetPipeConnections()
+    {
+        List<PipeClick> pipeClickConnections = new List<PipeClick>();
+        foreach(Transform t in connections)
+        {
+            PipeClick pc = t.GetComponent<PipeClick>();
+            pipeClickConnections.Add(pc);
+        }
+        return pipeClickConnections;
+    }
 }

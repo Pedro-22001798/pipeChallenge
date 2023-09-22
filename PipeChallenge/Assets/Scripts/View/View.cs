@@ -29,6 +29,7 @@ public class View : MonoBehaviour, IView
             pipeClick.DefinePipe(p, this);
         }
         cameraController.CalculateCameraPosition(gridSizeX, gridSizeY);
+        connectionsController.CheckConnections();
     }
 
 
@@ -63,7 +64,6 @@ public class View : MonoBehaviour, IView
         // Ensure the rotation is exact at the end
         pipeTransform.rotation = targetRotation;
         pipe.AllowRotation();
-        connectionsController.CheckConnections();
     }
 
     public void ClearLevel()

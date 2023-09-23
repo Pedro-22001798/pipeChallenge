@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class View : MonoBehaviour, IView
 {
-    [SerializeField] private Transform pipeContainer;
+    [SerializeField] private Transform pipeContainer, skinsContainer;
     [SerializeField] private GameObject[] pipePrefabs;
     [SerializeField] private TextMeshProUGUI currentLevelText, playerScoreText;
     [SerializeField] private CameraController cameraController;
@@ -15,6 +17,7 @@ public class View : MonoBehaviour, IView
     [SerializeField] private Animator levelTransitor, endTextAnimator, endBackgroundAnimator;
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Skin[] allSkins;
+    private ILevel currentLevel;
     bool isLerping = false;
 
     [System.Serializable]
@@ -25,6 +28,7 @@ public class View : MonoBehaviour, IView
 
     public void BuildLevel(ILevel level)
     {
+        currentLevel = level;
         currentLevelText.text = $"{level.LevelNumber}#";
         List<IPipe> allPipes = level.GetAllPipes();
         ClearLevel();
@@ -231,11 +235,13 @@ public class View : MonoBehaviour, IView
     }
 
     public void ChangeSkin(SkinType skinType)
-    {
-        for(int i = 0; i < pipePrefabs.Length; i++)
+    {    
+        for (int i = 0; i < pipePrefabs.Length; i++)
         {
-            SpriteRenderer sr = pipePrefabs[i].GetComponent<SpriteRenderer>();
-            switch(skinType)
+            GameObject originalPrefab = PrefabUtility.LoadPrefabContents(AssetDatabase.GetAssetPath(pipePrefabs[i])); 
+            SpriteRenderer sr = originalPrefab.GetComponent<SpriteRenderer>();
+
+            switch (skinType)
             {
                 case SkinType.triangular:
                     sr.sprite = allSkins[1].skins[i];
@@ -244,6 +250,39 @@ public class View : MonoBehaviour, IView
                     sr.sprite = allSkins[0].skins[i];
                     break;
             }
+
+            // Save the changes back to the original prefab
+            PrefabUtility.SaveAsPrefabAsset(originalPrefab, AssetDatabase.GetAssetPath(pipePrefabs[i]));
+            PrefabUtility.UnloadPrefabContents(originalPrefab);
+        }      
+    }
+
+    public void ActiveSkinButton(Transform activeButton)
+    {
+        foreach(Transform t in skinsContainer)
+        {
+            Image outline = t.GetChild(0).GetComponent<Image>();
+            if(t == activeButton)
+            {
+                outline.color = Color.white;
+            }
+            else
+            {
+                outline.color = Color.black;
+            }
+        }
+    }
+
+    public void RebuildMap()
+    {
+        ClearLevel();
+        List<IPipe> allPipes = currentLevel.GetAllPipes();
+        foreach (IPipe p in allPipes)
+        {
+            Quaternion rotation = Quaternion.Euler(0, 0, p.CurrentRotation);
+            GameObject pipe = Instantiate(GetPipePrefab(p.TypeOfPipe), new Vector3(p.Col, -p.Row, 0), rotation, pipeContainer);
+            PipeClick pipeClick = pipe.GetComponent<PipeClick>();
+            pipeClick.DefinePipe(p, this);
         }
     }
 }

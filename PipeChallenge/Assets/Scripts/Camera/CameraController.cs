@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class CameraController : MonoBehaviour
 {
@@ -16,9 +17,11 @@ public class CameraController : MonoBehaviour
     public void CalculateCameraPosition(int gridSizeX, int gridSizeY, float sizeAdd = 0f)
     {
         // Calculate the target position based on the grid size
-        float targetX = (float)(gridSizeX + 1) / 2; // Grid center in X-axis
-        float targetY = (float)(-gridSizeY -1) / 2; // Grid center in Y-axis
-
+        //float targetX = (float)(gridSizeX + 1) / 2; // Grid center in X-axis
+        // float targetY = (float)(-gridSizeY -1) / 2; // Grid center in Y-axis
+        // float targetX = (float)Mathf.Min(gridSizeX/2);
+        float targetX = (float)Math.Ceiling((float)gridSizeY/2f);
+        float targetY = (float)-Math.Ceiling((float)gridSizeX/2f);
         Vector3 targetPosition = new Vector3(targetX, targetY, mainCamera.transform.position.z);
 
         // Set the camera position directly to the target position

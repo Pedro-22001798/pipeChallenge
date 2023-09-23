@@ -17,6 +17,7 @@ public class View : MonoBehaviour, IView
     [SerializeField] private Animator levelTransitor, endTextAnimator, endBackgroundAnimator;
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Skin[] allSkins;
+    [SerializeField] private Animator[] optionsAnimators;
     private ILevel currentLevel;
     bool isLerping = false;
     private List<Animator> allPipeAnimators;
@@ -349,5 +350,35 @@ public class View : MonoBehaviour, IView
     {
         yield return new WaitForSeconds(duration);
         animator.SetTrigger(command);
+    }
+
+    public void OpenCloseOptions(bool isOpening)
+    {
+        if(isOpening)
+        {
+            for(int i = 0; i < optionsAnimators.Length; i++)
+            {
+                string mode;
+                if(i == 0)
+                    mode = "Pressed";
+                else
+                    mode = "Show";
+                optionsAnimators[i].SetTrigger(mode);
+            }
+        }
+        else
+        {
+            for(int i = 0; i < optionsAnimators.Length; i++)
+            {
+                string mode;
+                if(i == 0)
+                    mode = "Show";
+                else if(i > 0 && i < optionsAnimators.Length-1)
+                    mode = "Hide";
+                else
+                    mode = "Pressed";
+                optionsAnimators[i].SetTrigger(mode);
+            }
+        }
     }
 }

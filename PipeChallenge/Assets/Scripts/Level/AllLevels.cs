@@ -20,7 +20,7 @@ public class AllLevels : MonoBehaviour
         return allLevels[levelNumber].IsLocked;
     }
 
-    public void NextLevel()
+    public void NextLevel(bool isAutomaticTransition)
     {
         if(GameStateMachine.Instance.CurrentGameState == GameState.paused)
         {
@@ -30,17 +30,20 @@ public class AllLevels : MonoBehaviour
                 {
                     canPassLevel = false;
                     view.LevelTransition();
+                    if(!isAutomaticTransition)
+                        view.OpenCloseOptions(false);
                     StartCoroutine(LoadAndChangeLevel(levelLoader.CurrentLevel+1));
                 }
                 else
                 {
+                    SoundEffectManager.Instance.PlaySoundEffect(SoundEffect.wrong);
                     cameraShake.ShakeCamera();
                 }
             }
         }
     }
 
-    public void PreviousLevel()
+    public void PreviousLevel(bool isAutomaticTransition)
     {
         if(GameStateMachine.Instance.CurrentGameState == GameState.paused)
         {
@@ -50,10 +53,13 @@ public class AllLevels : MonoBehaviour
                 {
                     canPassLevel = false;
                     view.LevelTransition();
+                    if(!isAutomaticTransition)
+                        view.OpenCloseOptions(false);
                     StartCoroutine(LoadAndChangeLevel(levelLoader.CurrentLevel-1));
                 }
                 else
                 {
+                    SoundEffectManager.Instance.PlaySoundEffect(SoundEffect.wrong);
                     cameraShake.ShakeCamera();
                 }
             }

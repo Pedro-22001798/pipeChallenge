@@ -56,6 +56,6 @@ public class LevelController : MonoBehaviour
     private IEnumerator GoNextLevel()
     {
         yield return new WaitForSeconds(2.5f);
-        allLevels.NextLevel();
+        allLevels.NextLevel(true);
     }
 }

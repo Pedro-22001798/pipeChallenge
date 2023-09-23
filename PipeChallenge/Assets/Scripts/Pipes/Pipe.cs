@@ -28,6 +28,11 @@ public class Pipe : IPipe
         CurrentRotation += 90f;
     }
 
+    public void Restart()
+    {
+        CurrentRotation = StartRotation;
+    }
+
     public void LightPipe()
     {
         IsLight = true;

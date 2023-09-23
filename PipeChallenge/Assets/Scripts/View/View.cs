@@ -287,6 +287,7 @@ public class View : MonoBehaviour, IView
             if(isRestart)
             {
                 rotation = Quaternion.Euler(0, 0, p.StartRotation);
+                p.Restart();
             }  
             else
             {
@@ -302,6 +303,7 @@ public class View : MonoBehaviour, IView
         {
             cameraController.CalculateCameraPosition(gridSizeX, gridSizeY);
         }
+        AnimateMap(true);
         InitiateLevel(currentLevel);
     }
 

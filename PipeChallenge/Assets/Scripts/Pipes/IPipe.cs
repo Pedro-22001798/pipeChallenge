@@ -11,6 +11,7 @@ public interface IPipe
     int Row {get;}
     int Col {get;}
 
+    void Restart();
     void RotatePipe();
     void LightPipe();
     void UnlightPipe();

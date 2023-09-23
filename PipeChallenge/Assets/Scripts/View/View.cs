@@ -63,11 +63,13 @@ public class View : MonoBehaviour, IView
     public void RotatePipe(Transform pipeTransform, PipeClick pipe)
     {
         StartCoroutine(RotatePipeCoroutine(pipeTransform,pipe));
+        SoundEffectManager.Instance.PlaySoundEffect(SoundEffect.rotate);
     }
 
     public void BlockRotation(Transform pipeTransform, PipeClick pipe)
     {
         StartCoroutine(BlockRotationAnimation(pipeTransform,pipe));
+        SoundEffectManager.Instance.PlaySoundEffect(SoundEffect.wrong);
     }
 
     private IEnumerator RotatePipeCoroutine(Transform pipeTransform, PipeClick pipe)
@@ -146,7 +148,7 @@ public class View : MonoBehaviour, IView
                 return pipePrefabs[3];
         }
 
-        return pipePrefabs[0];
+        return pipePrefabs[4];
     }
 
     public void PauseGame()
@@ -238,7 +240,7 @@ public class View : MonoBehaviour, IView
 
     public void ChangeSkin(SkinType skinType)
     {    
-        for (int i = 0; i < pipePrefabs.Length; i++)
+        for (int i = 0; i < pipePrefabs.Length-1; i++)
         {
             GameObject originalPrefab = PrefabUtility.LoadPrefabContents(AssetDatabase.GetAssetPath(pipePrefabs[i])); 
             SpriteRenderer sr = originalPrefab.GetComponent<SpriteRenderer>();

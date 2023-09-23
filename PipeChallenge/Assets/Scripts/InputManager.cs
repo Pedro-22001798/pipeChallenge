@@ -24,7 +24,6 @@ public class InputManager : MonoBehaviour
                         if (pipeClick != null)
                         {
                             pipeClick.RotatePipe();
-                            SoundEffectManager.Instance.PlaySoundEffect(SoundEffect.rotate);
                         }
                     }
                     else if(hit.collider.tag == "LightPipe")
@@ -33,7 +32,6 @@ public class InputManager : MonoBehaviour
                         if (pipeClick != null)
                         {
                             pipeClick.RotatePipe(true);
-                            SoundEffectManager.Instance.PlaySoundEffect(SoundEffect.wrong);
                             cameraShake.ShakeCamera();
                         }
                     }

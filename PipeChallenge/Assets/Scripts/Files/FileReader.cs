@@ -69,6 +69,6 @@ public class FileReader : MonoBehaviour
                 return PipeType.end;
         }
 
-        return PipeType.normal;
+        return PipeType.empty;
     }
 }

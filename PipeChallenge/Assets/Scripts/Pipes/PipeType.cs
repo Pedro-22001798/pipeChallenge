@@ -3,5 +3,6 @@ public enum PipeType
     normal,
     curve,
     light,
-    end
+    end,
+    empty
 }

@@ -19,6 +19,8 @@ public class View : MonoBehaviour, IView
     [SerializeField] private Skin[] allSkins;
     private ILevel currentLevel;
     bool isLerping = false;
+    private List<Animator> allPipeAnimators;
+    private int gridSizeX, gridSizeY;
 
     [System.Serializable]
     public class Skin
@@ -30,34 +32,31 @@ public class View : MonoBehaviour, IView
     {
         currentLevel = level;
         currentLevelText.text = $"{level.LevelNumber}#";
-        List<IPipe> allPipes = level.GetAllPipes();
-        ClearLevel();
-        int gridSizeX = 0, gridSizeY = 0;
-        foreach (IPipe p in allPipes)
-        {
-            gridSizeX = Mathf.Max(gridSizeX, p.Row);
-            gridSizeY = Mathf.Max(gridSizeY, p.Col);
-            Quaternion rotation = Quaternion.Euler(0, 0, p.StartRotation);
-            GameObject pipe = Instantiate(GetPipePrefab(p.TypeOfPipe), new Vector3(p.Col, -p.Row, 0), rotation, pipeContainer);
-            PipeClick pipeClick = pipe.GetComponent<PipeClick>();
-            pipeClick.DefinePipe(p, this);
-        }
+        RebuildMap(true);
+    }
+
+    private void InitiateLevel(ILevel level)
+    {
         levelController.LoadNewLevel(level);
-        cameraController.CalculateCameraPosition(gridSizeX, gridSizeY);
         connectionsController.DefinePipes();
         connectionsController.CheckConnections();
         GameStateMachine.Instance.ResumeGame();
     }
 
-
     public void LightPipe(SpriteRenderer sr)
     {
-        sr.material = pipeMaterials[1];
+        if(sr != null)
+        {
+            sr.material = pipeMaterials[1];
+        }
     }
 
     public void UnlightPipe(SpriteRenderer sr)
     {
-        sr.material = pipeMaterials[0];
+        if(sr != null)
+        {
+            sr.material = pipeMaterials[0];
+        }
     }
 
     public void RotatePipe(Transform pipeTransform, PipeClick pipe)
@@ -153,7 +152,7 @@ public class View : MonoBehaviour, IView
     {
         if(!isLerping)
         {
-            float currentSize = mainCamera.orthographicSize;
+            float currentSize = cameraController.CalculateCameraSize(gridSizeX,gridSizeY);
             float newSize = currentSize + 2f;
             StartCoroutine(LerpCameraSize(newSize,0.5f));
         }
@@ -164,7 +163,7 @@ public class View : MonoBehaviour, IView
         if(!isLerping)
         {
             float currentSize = mainCamera.orthographicSize;
-            float newSize = currentSize - 2f;
+            float newSize = cameraController.CalculateCameraSize(gridSizeX,gridSizeY);
             StartCoroutine(LerpCameraSize(newSize,0.5f));  
         }    
     }
@@ -273,16 +272,80 @@ public class View : MonoBehaviour, IView
         }
     }
 
-    public void RebuildMap()
+    public void RebuildMap(bool isRestart)
     {
+        gridSizeX = 0;
+        gridSizeY = 0;
+        allPipeAnimators = new List<Animator>();
         ClearLevel();
         List<IPipe> allPipes = currentLevel.GetAllPipes();
         foreach (IPipe p in allPipes)
         {
-            Quaternion rotation = Quaternion.Euler(0, 0, p.CurrentRotation);
+            gridSizeX = Mathf.Max(gridSizeX, p.Row);
+            gridSizeY = Mathf.Max(gridSizeY, p.Col);  
+            Quaternion rotation;  
+            if(isRestart)
+            {
+                rotation = Quaternion.Euler(0, 0, p.StartRotation);
+            }  
+            else
+            {
+                rotation = Quaternion.Euler(0, 0, p.CurrentRotation);
+            }    
             GameObject pipe = Instantiate(GetPipePrefab(p.TypeOfPipe), new Vector3(p.Col, -p.Row, 0), rotation, pipeContainer);
+            Animator animator = pipe.GetComponent<Animator>();
+            allPipeAnimators.Add(animator);
             PipeClick pipeClick = pipe.GetComponent<PipeClick>();
             pipeClick.DefinePipe(p, this);
         }
+        if(isRestart)
+        {
+            cameraController.CalculateCameraPosition(gridSizeX, gridSizeY);
+        }
+        InitiateLevel(currentLevel);
+    }
+
+    public void AnimateMap(bool show)
+    {
+        List<Animator> remainingAnimators = new List<Animator>();
+        List<Animator> previousAnimator = new List<Animator>();
+        remainingAnimators = allPipeAnimators;
+        if(show)
+        {
+            ShuffleList(remainingAnimators);
+            foreach (var animator in remainingAnimators)
+            {
+                StartCoroutine(DelayAnimation(animator,0.3f,"Show"));
+                previousAnimator.Add(animator);
+            }
+        }
+        else
+        {
+            ShuffleList(remainingAnimators);
+            foreach (var animator in remainingAnimators)
+            {
+                StartCoroutine(DelayAnimation(animator,0.3f,"Hide"));
+                previousAnimator.Add(animator);
+            }          
+        }
+    }
+
+    private void ShuffleList<T>(List<T> list)
+    {
+        int n = list.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = Random.Range(0, n + 1);
+            T value = list[k];
+            list[k] = list[n];
+            list[n] = value;
+        }
+    }
+
+    private IEnumerator DelayAnimation(Animator animator, float duration, string command)
+    {
+        yield return new WaitForSeconds(duration);
+        animator.SetTrigger(command);
     }
 }

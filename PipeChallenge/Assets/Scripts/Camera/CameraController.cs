@@ -13,7 +13,7 @@ public class CameraController : MonoBehaviour
     }
 
     // Call this method to adjust the camera size and position based on the grid size
-    public void CalculateCameraPosition(int gridSizeX, int gridSizeY)
+    public void CalculateCameraPosition(int gridSizeX, int gridSizeY, float sizeAdd = 0f)
     {
         // Calculate the target position based on the grid size
         float targetX = (float)(gridSizeX + 1) / 2; // Grid center in X-axis
@@ -25,14 +25,12 @@ public class CameraController : MonoBehaviour
         mainCamera.transform.position = targetPosition;
 
         // Calculate the camera's new size based on the grid size
-        float newSize = CalculateCameraSize(gridSizeX,gridSizeY);
+        float newSize = CalculateCameraSize(gridSizeX,gridSizeY) + sizeAdd;
 
         // Ensure the camera size is not below the minimum size
         newSize = Mathf.Max(newSize, minSize);
 
         // Set the camera size directly to the new size
-        if(GameStateMachine.Instance.CurrentGameState == GameState.paused)
-            newSize += 2f;
         mainCamera.orthographicSize = newSize;
     }
 

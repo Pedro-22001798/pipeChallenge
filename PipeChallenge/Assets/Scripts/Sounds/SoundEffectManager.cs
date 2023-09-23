@@ -39,6 +39,10 @@ public class SoundEffectManager : MonoBehaviour
                 audioSource[3].Stop();
                 audioSource[3].Play();
                 break;
+            case SoundEffect.interfaceclick:
+                audioSource[4].Stop();
+                audioSource[4].Play();
+                break;
         }   
     }
 }

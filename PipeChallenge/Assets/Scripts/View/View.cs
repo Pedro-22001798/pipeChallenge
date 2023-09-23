@@ -171,6 +171,7 @@ public class View : MonoBehaviour, IView
 
     public void LevelTransition()
     {
+        SoundEffectManager.Instance.PlaySoundEffect(SoundEffect.transition);
         levelTransitor.SetTrigger("PassLevel");
     }
 
@@ -210,6 +211,7 @@ public class View : MonoBehaviour, IView
         }
         endBackgroundAnimator.SetTrigger("WinLevel");
         endTextAnimator.SetTrigger("WinLevel");
+        SoundEffectManager.Instance.PlaySoundEffect(SoundEffect.win);
         StartCoroutine(LerpEndPipesMaterials(sr,0.5f));
     }
 
@@ -354,6 +356,7 @@ public class View : MonoBehaviour, IView
 
     public void OpenCloseOptions(bool isOpening)
     {
+        SoundEffectManager.Instance.PlaySoundEffect(SoundEffect.interfaceclick);
         if(isOpening)
         {
             for(int i = 0; i < optionsAnimators.Length; i++)

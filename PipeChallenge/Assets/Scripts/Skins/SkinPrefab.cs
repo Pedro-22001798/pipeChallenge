@@ -19,6 +19,7 @@ public class SkinPrefab : MonoBehaviour
     public void ChooseSkin()
     {
         SkinManager.Instance.ChangeSkin(skinType,this.transform);
+        SoundEffectManager.Instance.PlaySoundEffect(SoundEffect.interfaceclick);
     }
 
     public SkinType GetSkin()

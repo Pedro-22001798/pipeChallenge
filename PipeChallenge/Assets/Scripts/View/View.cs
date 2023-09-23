@@ -242,8 +242,7 @@ public class View : MonoBehaviour, IView
     {    
         for (int i = 0; i < pipePrefabs.Length-1; i++)
         {
-            GameObject originalPrefab = PrefabUtility.LoadPrefabContents(AssetDatabase.GetAssetPath(pipePrefabs[i])); 
-            SpriteRenderer sr = originalPrefab.GetComponent<SpriteRenderer>();
+            SpriteRenderer sr = pipePrefabs[i].GetComponent<SpriteRenderer>();
 
             switch (skinType)
             {
@@ -254,10 +253,6 @@ public class View : MonoBehaviour, IView
                     sr.sprite = allSkins[0].skins[i];
                     break;
             }
-
-            // Save the changes back to the original prefab
-            PrefabUtility.SaveAsPrefabAsset(originalPrefab, AssetDatabase.GetAssetPath(pipePrefabs[i]));
-            PrefabUtility.UnloadPrefabContents(originalPrefab);
         }      
     }
 

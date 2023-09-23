@@ -5,22 +5,22 @@ using UnityEngine;
 public class LevelLoader : MonoBehaviour
 {
     private LevelController levelController;
-    private FileDetection fileDetection;
+    private Levels levels;
     private FileReader fileReader;
     private AllLevels allLevels;
     private View view;
     public int CurrentLevel {get; private set;} = 0;
     List<string> allStringLevels;
 
-    public void StartGame(LevelController levelController, FileDetection fileDetection, FileReader fileReader, AllLevels allLevels, View view)
+    public void StartGame(LevelController levelController, Levels levels, FileReader fileReader, AllLevels allLevels, View view)
     {
         this.levelController = levelController;
-        this.fileDetection = fileDetection;
+        this.levels = levels;
         this.fileReader = fileReader;
         this.allLevels = allLevels;
         this.view = view;
         allStringLevels = new List<string>();
-        allStringLevels = fileDetection.GetLevelFiles();
+        allStringLevels = levels.Maps;
         BuildAllLevels();
         LoadNewLevel(CurrentLevel);
     }

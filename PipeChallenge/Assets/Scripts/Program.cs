@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Program : MonoBehaviour
 {
-    [SerializeField] private FileDetection fileDetection;
+    [SerializeField] private Levels levels;
     [SerializeField] private LevelLoader levelLoader;
     [SerializeField] private LevelController levelController;
     [SerializeField] private FileReader fileReader;
@@ -14,6 +14,6 @@ public class Program : MonoBehaviour
     void Start()
     {
         fileReader.StartGame(allLevels,view);
-        levelLoader.StartGame(levelController,fileDetection,fileReader,allLevels, view);
+        levelLoader.StartGame(levelController,levels,fileReader,allLevels, view);
     }
 }

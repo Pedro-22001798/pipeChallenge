@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: cc421da483ed06c49933077a621bff25, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: fa1261f1380995940b69b680f508468a, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.14128938, g: 0.12056913, b: 0.18430236, a: 1}
+  m_IndirectSpecularColor: {r: 0.07559701, g: 0.053540446, b: 0.12243921, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -854,6 +854,7 @@ MonoBehaviour:
   - {fileID: 3855155971912952351, guid: 41c81742cc8624347af8409fb9975b8c, type: 3}
   - {fileID: 104832588578450293, guid: b24b5c9595aab4b489d67ded73a2e075, type: 3}
   - {fileID: 3715576686547826999, guid: 78607cd1973782e48a581550a999b6ab, type: 3}
+  - {fileID: 6033437455863990226, guid: 9b26ef837ca96754aa053c58c7b237d5, type: 3}
   currentLevelText: {fileID: 2073378316}
   playerScoreText: {fileID: 746935885}
   cameraController: {fileID: 717941606}
@@ -2378,7 +2379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d89243ec95421e4e8791cf424e54232, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileDetection: {fileID: 2139589756}
+  levels: {fileID: 2139589757}
   levelLoader: {fileID: 1339776298}
   levelController: {fileID: 1339776299}
   fileReader: {fileID: 2139589755}
@@ -5537,6 +5538,7 @@ GameObject:
   - component: {fileID: 2139589754}
   - component: {fileID: 2139589756}
   - component: {fileID: 2139589755}
+  - component: {fileID: 2139589757}
   m_Layer: 0
   m_Name: Files
   m_TagString: Untagged
@@ -5581,5 +5583,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb509fcbf5c41e54f8be1dcdeae862bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2139589757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2139589753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b3621d6ecf4f5a4897ee928410b6252, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

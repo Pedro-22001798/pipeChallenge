@@ -6,6 +6,7 @@ public class LevelController : MonoBehaviour
 {
     [SerializeField] private LevelLoader levelLoader;
     [SerializeField] private AllLevels allLevels;
+    [SerializeField] private LevelScoreCalculator scoreCalculator;
     private List<IPipe> allEndingPipes = new List<IPipe>();
     private ILevel currentLevel;
     [SerializeField] private PlayerScore playerScore;
@@ -40,9 +41,13 @@ public class LevelController : MonoBehaviour
         view.WinLevel();
         if(!currentLevel.IsPassed)
         {
-            playerScore.AddScore(1);
-            currentLevel.PassLevel(1);
             levelLoader.UnlockNextLevel();
+        }
+        int tempPlayerScore = scoreCalculator.CalculateScore(currentLevel,20f);
+        if(tempPlayerScore > currentLevel.Score)
+        {
+            playerScore.AddScore((tempPlayerScore-currentLevel.Score));
+            currentLevel.PassLevel(tempPlayerScore);
         }
         GameStateMachine.Instance.PauseGame();
         StartCoroutine(GoNextLevel());

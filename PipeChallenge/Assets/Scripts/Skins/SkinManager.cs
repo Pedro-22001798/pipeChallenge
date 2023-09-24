@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class SkinManager : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class SkinManager : MonoBehaviour
     public static SkinManager Instance {get; private set;}
     [SerializeField] private View view;
     public SkinType SkinType {get; private set;}
+    private bool isActive = true;
 
     private void Awake() 
     { 
@@ -42,5 +44,29 @@ public class SkinManager : MonoBehaviour
         SkinType = newSkinType;
         view.ChangeSkin(SkinType);
         view.ActiveSkinButton(activeButton);
+    }
+
+    public void ActivateDeactivateSkinsContainer()
+    {
+        isActive = !isActive;
+        if(!isActive)
+        {
+            foreach(Transform t in skinsPrefabs)
+            {
+                Animator anim = t.GetComponent<Animator>();
+                anim.SetTrigger("Hide");
+            }
+            StartCoroutine(WaitToDeactivate());
+        }
+        else
+        {
+            skinsPrefabs.gameObject.SetActive(isActive);
+        }
+    }
+
+    private IEnumerator WaitToDeactivate()
+    {
+        yield return new WaitForSeconds(0.3f);
+        skinsPrefabs.gameObject.SetActive(false);
     }
 }

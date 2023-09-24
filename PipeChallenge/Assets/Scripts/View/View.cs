@@ -154,9 +154,14 @@ public class View : MonoBehaviour, IView
     {
         if(!isLerping)
         {
-            float currentSize = cameraController.CalculateCameraSize(gridSizeX,gridSizeY);
-            float newSize = currentSize + 2f;
-            StartCoroutine(LerpCameraSize(newSize,0.5f));
+            {
+                if(GameStateMachine.Instance.CurrentGameState == GameState.playing)
+                {
+                    float currentSize = cameraController.CalculateCameraSize(gridSizeX,gridSizeY);
+                    float newSize = currentSize + 2f;
+                    StartCoroutine(LerpCameraSize(newSize,0.5f));
+                }
+            }
         }
     }
 
@@ -164,9 +169,12 @@ public class View : MonoBehaviour, IView
     {
         if(!isLerping)
         {
-            float currentSize = mainCamera.orthographicSize;
-            float newSize = cameraController.CalculateCameraSize(gridSizeX,gridSizeY);
-            StartCoroutine(LerpCameraSize(newSize,0.5f));  
+            if(GameStateMachine.Instance.CurrentGameState == GameState.paused)
+            {
+                float currentSize = mainCamera.orthographicSize;
+                float newSize = cameraController.CalculateCameraSize(gridSizeX,gridSizeY);
+                StartCoroutine(LerpCameraSize(newSize,0.5f)); 
+            } 
         }    
     }
 
@@ -352,31 +360,36 @@ public class View : MonoBehaviour, IView
 
     public void OpenCloseOptions(bool isOpening)
     {
-        SoundEffectManager.Instance.PlaySoundEffect(SoundEffect.interfaceclick);
         if(isOpening)
         {
-            for(int i = 0; i < optionsAnimators.Length; i++)
+            if(GameStateMachine.Instance.CurrentGameState == GameState.playing)
             {
-                string mode;
-                if(i == 0)
-                    mode = "Pressed";
-                else
-                    mode = "Show";
-                optionsAnimators[i].SetTrigger(mode);
+                for(int i = 0; i < optionsAnimators.Length; i++)
+                {
+                    string mode;
+                    if(i == 0)
+                        mode = "Pressed";
+                    else
+                        mode = "Show";
+                    optionsAnimators[i].SetTrigger(mode);
+                }
             }
         }
         else
         {
-            for(int i = 0; i < optionsAnimators.Length; i++)
+            if(GameStateMachine.Instance.CurrentGameState == GameState.paused)
             {
-                string mode;
-                if(i == 0)
-                    mode = "Show";
-                else if(i > 0 && i < optionsAnimators.Length-1)
-                    mode = "Hide";
-                else
-                    mode = "Pressed";
-                optionsAnimators[i].SetTrigger(mode);
+                for(int i = 0; i < optionsAnimators.Length; i++)
+                {
+                    string mode;
+                    if(i == 0)
+                        mode = "Show";
+                    else if(i > 0 && i < optionsAnimators.Length-1)
+                        mode = "Hide";
+                    else
+                        mode = "Pressed";
+                    optionsAnimators[i].SetTrigger(mode);
+                }
             }
         }
     }

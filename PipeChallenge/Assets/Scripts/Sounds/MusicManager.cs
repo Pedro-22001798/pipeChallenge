@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class MusicManager : MonoBehaviour
 {
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip[] backgroundMusics;
     public Music CurrentMusic {get; private set;} = Music.abstractworld;
+    [SerializeField] private AudioMixer audioMixer;
+    private bool isMuted = false;
 
     void Start()
     {
@@ -42,5 +45,18 @@ public class MusicManager : MonoBehaviour
         }
 
         audioSource.Play();
+    }
+
+    public void ChangeVolume()
+    {
+        isMuted = !isMuted;
+        if(!isMuted)
+        {
+            audioMixer.SetFloat("MusicVolume", 0f);
+        }
+        else
+        {
+            audioMixer.SetFloat("MusicVolume", -80f);
+        }
     }
 }

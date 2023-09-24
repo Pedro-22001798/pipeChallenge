@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SoundEffectManager : MonoBehaviour
 {
     public static SoundEffectManager Instance {get; private set;}
     [SerializeField] private AudioSource[] audioSource;
+    [SerializeField] private AudioMixer audioMixer;
+    private bool isMuted = false;
 
     private void Awake() 
     { 
@@ -44,5 +47,18 @@ public class SoundEffectManager : MonoBehaviour
                 audioSource[4].Play();
                 break;
         }   
+    }
+
+    public void ChangeVolume()
+    {
+        isMuted = !isMuted;
+        if(!isMuted)
+        {
+            audioMixer.SetFloat("SoundEffectVolume", 0f);
+        }
+        else
+        {
+            audioMixer.SetFloat("SoundEffectVolume", -80f);
+        }
     }
 }

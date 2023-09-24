@@ -30,8 +30,11 @@ public class AllLevels : MonoBehaviour
                 {
                     canPassLevel = false;
                     view.LevelTransition();
-                    if(!isAutomaticTransition)
-                        view.OpenCloseOptions(false);
+                    if(isAutomaticTransition)
+                    {
+                        //view.OpenCloseOptions(false);
+                        GameStateMachine.Instance.ResumeGame();
+                    }
                     StartCoroutine(LoadAndChangeLevel(levelLoader.CurrentLevel+1));
                 }
                 else
@@ -53,8 +56,11 @@ public class AllLevels : MonoBehaviour
                 {
                     canPassLevel = false;
                     view.LevelTransition();
-                    if(!isAutomaticTransition)
-                        view.OpenCloseOptions(false);
+                    if(isAutomaticTransition)
+                    {
+                        //view.OpenCloseOptions(false);
+                        GameStateMachine.Instance.ResumeGame();
+                    }
                     StartCoroutine(LoadAndChangeLevel(levelLoader.CurrentLevel-1));
                 }
                 else

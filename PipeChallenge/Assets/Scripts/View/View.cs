@@ -41,7 +41,6 @@ public class View : MonoBehaviour, IView
         levelController.LoadNewLevel(level);
         connectionsController.DefinePipes();
         connectionsController.CheckConnections();
-        GameStateMachine.Instance.ResumeGame();
     }
 
     public void LightPipe(SpriteRenderer sr)

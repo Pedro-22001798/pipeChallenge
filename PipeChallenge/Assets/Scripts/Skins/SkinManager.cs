@@ -43,7 +43,7 @@ public class SkinManager : MonoBehaviour
     {
         SkinType = newSkinType;
         view.ChangeSkin(SkinType);
-        view.ActiveSkinButton(activeButton);
+        view.ActiveSkinButton(activeButton,skinsPrefabs);
     }
 
     public void ActivateDeactivateSkinsContainer()

@@ -263,9 +263,9 @@ public class View : MonoBehaviour, IView
         }      
     }
 
-    public void ActiveSkinButton(Transform activeButton)
+    public void ActiveSkinButton(Transform activeButton, Transform container)
     {
-        foreach(Transform t in skinsContainer)
+        foreach(Transform t in container)
         {
             Image outline = t.GetChild(0).GetComponent<Image>();
             if(t == activeButton)

@@ -7,57 +7,66 @@ public class ConnectionsController : MonoBehaviour
     [SerializeField] private LevelController levelController;
     [SerializeField] private Transform allPipesTransfrom;
     private List<PipeClick> allPipes;
+    private List<PipeClick> allLights;
+    private List<PipeClick> pipesToTurnOn;
 
     public void DefinePipes()
     {
         allPipes = new List<PipeClick>();
+        allLights = new List<PipeClick>();
         foreach(Transform t in allPipesTransfrom)
         {
             PipeClick pc = t.GetComponent<PipeClick>();
             if(pc != null)
+            {
                 allPipes.Add(pc);
+                if(pc.Pipe.TypeOfPipe == PipeType.light)
+                    allLights.Add(pc);
+            }
         }
     }
 
     public void CheckConnections()
     {
-            foreach(PipeClick pc in allPipes)
-            {
-                if(pc.Pipe.TypeOfPipe != PipeType.light)
-                    pc.UnlightPipe();
-            }
+        foreach(PipeClick pc in allPipes)
+        {
+            if(pc.Pipe.TypeOfPipe != PipeType.light)
+                pc.UnlightPipe();
+        }
 
-            foreach(PipeClick pc in allPipes)
-            {
-                List<PipeClick> allConnections = new List<PipeClick>();
-                allConnections = pc.GetPipeConnections();
-                if(allConnections.Count > 0)
-                {
-                    foreach(PipeClick pc2 in allConnections)
-                    {
-                        if(pc2.Pipe.TypeOfPipe == PipeType.light)
-                        {
-                            pc.LightPipe();
-                        }
-                        else
-                        {
-                            if(pc2.IsLight())
-                            {
-                                pc.LightPipe();
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    if(pc.Pipe.TypeOfPipe != PipeType.light)
-                        pc.UnlightPipe();
-                }
-            }
+        pipesToTurnOn = new List<PipeClick>();
 
-            if(levelController.CheckIfLevelWon())
+        foreach(PipeClick pc in allLights)
+        {
+            GetConnectedPipes(pc);
+        }
+
+        foreach(PipeClick pc in pipesToTurnOn)
+        {
+            pc.LightPipe();
+        }
+
+        if(levelController.CheckIfLevelWon())
+        {
+            levelController.PassLevel();
+        }
+    }
+
+    private void GetConnectedPipes(PipeClick pipeClick)
+    {
+        if (pipeClick.GetConnections().Count == 0 || pipesToTurnOn.Contains(pipeClick))
+        {
+            return;
+        }
+        else
+        {
+            pipesToTurnOn.Add(pipeClick);
+            foreach (PipeClick pc in pipeClick.GetConnections())
             {
-                levelController.PassLevel();
+                GetConnectedPipes(pc);
             }
         }
+    }
+
 }
+

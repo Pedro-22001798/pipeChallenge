@@ -8,14 +8,14 @@ public class PipeClick : MonoBehaviour
     private View view;
     private bool isRotating;
     private SpriteRenderer sr;
-    private List<Transform> connections;
+    private List<PipeClick> connections;
 
     public void DefinePipe(IPipe pipe, View view)
     {
         this.Pipe = pipe;
         this.view = view;
         sr = GetComponent<SpriteRenderer>();
-        connections = new List<Transform>();
+        connections = new List<PipeClick>();
         if(IsLight())
             view.LightPipe(sr);
     }
@@ -48,6 +48,10 @@ public class PipeClick : MonoBehaviour
         {
             Pipe.LightPipe();
             view.LightPipe(sr);
+            foreach(PipeClick pc in connections)
+            {
+                pc.LightPipe();
+            }
         }
     }
 
@@ -68,29 +72,19 @@ public class PipeClick : MonoBehaviour
     public void DefineConnections(List<Transform> newConnections)
     {
         List<IPipe> pipeConnections = new List<IPipe>();
-        connections = newConnections;
+        connections = new List<PipeClick>();
         foreach(Transform t in newConnections)
         {
             PipeClick pipeClick = t.GetComponent<PipeClick>();
+            connections.Add(pipeClick);
             IPipe pipe = pipeClick.Pipe;
             pipeConnections.Add(pipe);
         }
         Pipe.DefineConnections(pipeConnections);
     }
 
-    public List<Transform> GetConnections()
+    public List<PipeClick> GetConnections()
     {
         return connections;
-    }
-
-    public List<PipeClick> GetPipeConnections()
-    {
-        List<PipeClick> pipeClickConnections = new List<PipeClick>();
-        foreach(Transform t in connections)
-        {
-            PipeClick pc = t.GetComponent<PipeClick>();
-            pipeClickConnections.Add(pc);
-        }
-        return pipeClickConnections;
     }
 }

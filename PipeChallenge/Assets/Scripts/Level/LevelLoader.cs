@@ -27,11 +27,13 @@ public class LevelLoader : MonoBehaviour
     public void LoadNewLevel(int levelNumber)
     {
         view.BuildLevel(allLevels.GetLevel(levelNumber));
+        CurrentLevel = allLevels.GetLevel(levelNumber).LevelNumber-1;
     }
 
     public void LoadNewLevel(ILevel level)
     {
         view.BuildLevel(level);
+        CurrentLevel = level.LevelNumber-1;
     }
 
     public void BuildAllLevels()

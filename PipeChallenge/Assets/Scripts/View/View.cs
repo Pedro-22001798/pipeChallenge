@@ -14,6 +14,7 @@ public class View : MonoBehaviour
     [SerializeField] private Material[] pipeMaterials;
     [SerializeField] private ConnectionsController connectionsController;
     [SerializeField] private LevelController levelController;
+    [SerializeField] private AllLevels allLevels;
     [SerializeField] private Animator levelTransitor, endTextAnimator, endBackgroundAnimator, chooseLevelMenu;
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Skin[] allSkins;
@@ -419,9 +420,21 @@ public class View : MonoBehaviour
         }
     }
 
-    public void StartGame()
+    public void HideShowLevelMenu(bool isShow)
     {
-        chooseLevelMenu.SetTrigger("Hide");
-        optionsAnimators[0].gameObject.SetActive(true);
+        if(!isShow)
+        {
+            chooseLevelMenu.SetTrigger("Hide");
+            optionsAnimators[0].gameObject.SetActive(true);
+            optionsAnimators[0].SetTrigger("Show");
+            GameStateMachine.Instance.ResumeGame();
+        }
+        else
+        {
+            optionsAnimators[0].gameObject.SetActive(false);
+            OpenCloseOptions(!isShow);
+            chooseLevelMenu.SetTrigger("Show");
+            CreateLevelsUI(allLevels.GetAllLevels());
+        }
     }
 }

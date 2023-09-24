@@ -62,7 +62,7 @@ public class LevelPrefab : MonoBehaviour
         {
             levelLoader.LoadNewLevel(level);
             SoundEffectManager.Instance.PlaySoundEffect(SoundEffect.interfaceclick);
-            view.StartGame();
+            view.HideShowLevelMenu(false);
         }
         else
         {

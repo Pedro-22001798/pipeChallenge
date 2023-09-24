@@ -41,7 +41,7 @@ public class LevelController : MonoBehaviour
         if(!currentLevel.IsPassed)
         {
             playerScore.AddScore(1);
-            currentLevel.PassLevel();
+            currentLevel.PassLevel(1);
             levelLoader.UnlockNextLevel();
         }
         GameStateMachine.Instance.PauseGame();

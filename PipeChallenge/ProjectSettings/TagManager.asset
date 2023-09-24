@@ -9,6 +9,7 @@ TagManager:
   - ConnectionsController
   - EndPipe
   - LightPipe
+  - LevelParent
   layers:
   - Default
   - TransparentFX

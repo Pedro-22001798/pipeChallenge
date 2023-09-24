@@ -22,12 +22,16 @@ public class LevelLoader : MonoBehaviour
         allStringLevels = new List<string>();
         allStringLevels = levels.Maps;
         BuildAllLevels();
-        LoadNewLevel(CurrentLevel);
     }
 
     public void LoadNewLevel(int levelNumber)
     {
         view.BuildLevel(allLevels.GetLevel(levelNumber));
+    }
+
+    public void LoadNewLevel(ILevel level)
+    {
+        view.BuildLevel(level);
     }
 
     public void BuildAllLevels()
@@ -36,6 +40,7 @@ public class LevelLoader : MonoBehaviour
         {
             ILevel level = fileReader.ReadFile(allStringLevels[i], i+1);
         }
+        view.CreateLevelsUI(allLevels.GetAllLevels());
     }
 
     public void ChangeLevel(int newNumLevel)

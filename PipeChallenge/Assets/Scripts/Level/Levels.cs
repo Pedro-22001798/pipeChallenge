@@ -10,12 +10,6 @@ public class Levels : MonoBehaviour
     {
         Maps = new List<string>();
 
-        Maps.Add("empty,0,empty,0,empty,0,empty,0,end,90,curve,90\n" +
-                 "light,0,normal,90,normal,90,curve,90,normal,180,curve,90\n" +
-                 "empty,0,empty,0,empty,0,curve,90,curve,180,curve,90\n" +
-                 "empty,0,curve,90,curve,180,empty,0,light,-90,normal,90\n" +
-                 "end,0,curve,90,curve,180,normal,0,curve,90,normal,90");
-
         Maps.Add("light,-90\n" +
                  "normal,0\n" +
                  "end,90");

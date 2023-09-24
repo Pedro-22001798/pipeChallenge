@@ -5,19 +5,20 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class View : MonoBehaviour, IView
+public class View : MonoBehaviour
 {
-    [SerializeField] private Transform pipeContainer, skinsContainer;
+    [SerializeField] private Transform pipeContainer, skinsContainer, levelContainer;
     [SerializeField] private GameObject[] pipePrefabs;
     [SerializeField] private TextMeshProUGUI currentLevelText, playerScoreText;
     [SerializeField] private CameraController cameraController;
     [SerializeField] private Material[] pipeMaterials;
     [SerializeField] private ConnectionsController connectionsController;
     [SerializeField] private LevelController levelController;
-    [SerializeField] private Animator levelTransitor, endTextAnimator, endBackgroundAnimator;
+    [SerializeField] private Animator levelTransitor, endTextAnimator, endBackgroundAnimator, chooseLevelMenu;
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Skin[] allSkins;
     [SerializeField] private Animator[] optionsAnimators;
+    [SerializeField] private GameObject levelPrefab;
     private ILevel currentLevel;
     bool isLerping = false;
     private List<Animator> allPipeAnimators;
@@ -397,5 +398,30 @@ public class View : MonoBehaviour, IView
                 }
             }
         }
+    }
+
+    public void CreateLevelsUI(List<ILevel> allLevels)
+    {
+        ResetLevelsUI();
+        foreach(ILevel level in allLevels)
+        {
+            GameObject tempLevel = Instantiate(levelPrefab,levelContainer);
+            LevelPrefab lp = tempLevel.GetComponent<LevelPrefab>();
+            lp.DefineLevel(level,this);
+        }
+    }
+
+    private void ResetLevelsUI()
+    {
+        foreach(Transform t in levelContainer)
+        {
+            Destroy(t.gameObject);
+        }
+    }
+
+    public void StartGame()
+    {
+        chooseLevelMenu.SetTrigger("Hide");
+        optionsAnimators[0].gameObject.SetActive(true);
     }
 }

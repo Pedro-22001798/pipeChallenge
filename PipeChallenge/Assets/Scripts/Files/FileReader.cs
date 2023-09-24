@@ -90,8 +90,8 @@ public class FileReader : MonoBehaviour
             }
         }
         ILevel newLevel;
-        if (currentLevel == 0)
-            newLevel = new Level(currentLevel, allPipes);
+        if (currentLevel == 1)
+            newLevel = new Level(currentLevel, allPipes, false, false);
         else
             newLevel = new Level(currentLevel, allPipes, false, true);
         

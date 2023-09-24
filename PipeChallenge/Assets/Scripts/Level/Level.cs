@@ -8,8 +8,9 @@ public class Level : ILevel
     List<IPipe> allPipes = new List<IPipe>();
     public bool IsLocked {get; private set;}
     public bool IsPassed {get; private set;}
+    public int Score {get; private set;}
 
-    public Level(int levelNumber, List<IPipe> allPipes, bool isPassed = false, bool isLocked = true)
+    public Level(int levelNumber, List<IPipe> allPipes, bool isPassed, bool isLocked)
     {
         this.LevelNumber = levelNumber;
         this.allPipes = allPipes;
@@ -22,10 +23,12 @@ public class Level : ILevel
         IsLocked = false;
     }
 
-    public void PassLevel()
+    public void PassLevel(int score)
     {
         if(!IsPassed)
             IsPassed = true;
+        if(score > this.Score)
+            this.Score = score;
     }
 
     public List<IPipe> GetAllPipes()

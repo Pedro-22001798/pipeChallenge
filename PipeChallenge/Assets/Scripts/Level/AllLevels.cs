@@ -77,6 +77,11 @@ public class AllLevels : MonoBehaviour
         return allLevels[numLevel];
     }
 
+    public List<ILevel> GetAllLevels()
+    {
+        return allLevels;
+    }
+
     private IEnumerator LoadAndChangeLevel(int level)
     {
         yield return new WaitForSeconds(0.3f);

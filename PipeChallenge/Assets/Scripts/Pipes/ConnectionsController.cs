@@ -14,7 +14,8 @@ public class ConnectionsController : MonoBehaviour
         foreach(Transform t in allPipesTransfrom)
         {
             PipeClick pc = t.GetComponent<PipeClick>();
-            allPipes.Add(pc);
+            if(pc != null)
+                allPipes.Add(pc);
         }
     }
 

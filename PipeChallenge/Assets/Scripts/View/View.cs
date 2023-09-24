@@ -302,9 +302,11 @@ public class View : MonoBehaviour, IView
             }    
             GameObject pipe = Instantiate(GetPipePrefab(p.TypeOfPipe), new Vector3(p.Col, -p.Row, 0), rotation, pipeContainer);
             Animator animator = pipe.GetComponent<Animator>();
-            allPipeAnimators.Add(animator);
+            if(animator != null)
+                allPipeAnimators.Add(animator);
             PipeClick pipeClick = pipe.GetComponent<PipeClick>();
-            pipeClick.DefinePipe(p, this);
+            if(pipeClick != null)
+                pipeClick.DefinePipe(p, this);
         }
         if(isRestart)
         {

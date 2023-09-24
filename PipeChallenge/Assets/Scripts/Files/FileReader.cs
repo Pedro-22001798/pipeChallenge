@@ -67,7 +67,13 @@ public class FileReader : MonoBehaviour
             for (int col = 0; col < cells.Length; col += 2)
             {
                 string pipeType = cells[col];
-                float rotation = float.Parse(cells[col + 1]);
+                float rotation = 0; // Default rotation value
+
+                // Check if there is a rotation value in the next cell
+                if (col + 1 < cells.Length)
+                {
+                    rotation = float.Parse(cells[col + 1]);
+                }
                 int actualCol = col / 2 + 1;
                 PipeType typeOfPipe = GetTypeOfPipe(pipeType);
                 IPipe pipe;

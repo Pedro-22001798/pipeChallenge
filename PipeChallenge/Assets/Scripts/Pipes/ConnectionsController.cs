@@ -24,6 +24,13 @@ public class ConnectionsController : MonoBehaviour
                     allLights.Add(pc);
             }
         }
+        StartCoroutine(WaitAndCheckConnections());
+    }
+
+    private IEnumerator WaitAndCheckConnections()
+    {
+        yield return new WaitForSeconds(1f);
+        CheckConnections();
     }
 
     public void CheckConnections()

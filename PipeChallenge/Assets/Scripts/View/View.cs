@@ -40,7 +40,6 @@ public class View : MonoBehaviour, IView
     {
         levelController.LoadNewLevel(level);
         connectionsController.DefinePipes();
-        connectionsController.CheckConnections();
     }
 
     public void LightPipe(SpriteRenderer sr)
@@ -87,6 +86,7 @@ public class View : MonoBehaviour, IView
         // Ensure the rotation is exact at the end
         pipeTransform.rotation = targetRotation;
         pipe.AllowRotation();
+        connectionsController.CheckConnections();
     }
 
     private IEnumerator BlockRotationAnimation(Transform pipeTransform, PipeClick pipe)
@@ -212,10 +212,13 @@ public class View : MonoBehaviour, IView
         foreach(Transform t in pipeContainer)
         {
             PipeClick pc = t.GetComponent<PipeClick>();
-            if(pc.Pipe.TypeOfPipe == PipeType.end)
+            if(pc != null)
             {
-                SpriteRenderer sr2 = t.GetComponent<SpriteRenderer>();
-                sr.Add(sr2);
+                if(pc.Pipe.TypeOfPipe == PipeType.end)
+                {
+                    SpriteRenderer sr2 = t.GetComponent<SpriteRenderer>();
+                    sr.Add(sr2);
+                }
             }
         }
         endBackgroundAnimator.SetTrigger("WinLevel");

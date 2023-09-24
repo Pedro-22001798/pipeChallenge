@@ -6,13 +6,6 @@ public class CheckConnection : MonoBehaviour
 {
     [SerializeField] private PipeClick pipeClick;
     private List<Transform> connections = new List<Transform>();
-    private ConnectionsController connectionsController;
-
-    void Awake()
-    {
-        GameObject cC = GameObject.FindWithTag("ConnectionsController");
-        connectionsController = cC.GetComponent<ConnectionsController>();
-    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -23,7 +16,6 @@ public class CheckConnection : MonoBehaviour
             {
                 connections.Add(connection);
                 pipeClick.DefineConnections(connections);
-                connectionsController.CheckConnections();
             }
         }
     }
@@ -35,7 +27,6 @@ public class CheckConnection : MonoBehaviour
         {
             connections.Remove(connection);    
             pipeClick.DefineConnections(connections); 
-            connectionsController.CheckConnections();
         }
     }
 }

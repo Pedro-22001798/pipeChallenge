@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class LevelLoader : MonoBehaviour
 {
+    [SerializeField] private SaveManager saveManager;
     private LevelController levelController;
     private Levels levels;
     private FileReader fileReader;
     private AllLevels allLevels;
     private View view;
     public int CurrentLevel {get; private set;} = 0;
-    List<string> allStringLevels;
+    private List<string> allStringLevels;
 
     public void StartGame(LevelController levelController, Levels levels, FileReader fileReader, AllLevels allLevels, View view)
     {
@@ -42,6 +43,8 @@ public class LevelLoader : MonoBehaviour
         {
             ILevel level = fileReader.ReadFile(allStringLevels[i], i+1);
         }
+        if(saveManager.SaveExists)
+            allLevels.SetLevelSavedInformation();
         view.CreateLevelsUI(allLevels.GetAllLevels());
     }
 

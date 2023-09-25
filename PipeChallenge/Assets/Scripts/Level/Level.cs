@@ -18,6 +18,16 @@ public class Level : ILevel
         this.IsLocked = isLocked;
     }
 
+    public void LoadSavedLevel(int newScore, bool newLocked)
+    {
+        this.IsLocked = newLocked;
+        this.Score = newScore;
+        if(IsLocked)
+        {
+            IsPassed = false;
+        }
+    }
+
     public void UnlockLevel()
     {
         IsLocked = false;

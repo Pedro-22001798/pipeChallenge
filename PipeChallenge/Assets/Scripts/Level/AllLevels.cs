@@ -4,11 +4,20 @@ using UnityEngine;
 
 public class AllLevels : MonoBehaviour
 {
-    List<ILevel> allLevels = new List<ILevel>();
+    private List<ILevel> allLevels = new List<ILevel>();
+    private List<int> levelsScore;
+    private List<bool> levelsUnlocked = new List<bool>();
     [SerializeField] private LevelLoader levelLoader;
     [SerializeField] private View view;
     [SerializeField] private CameraShake cameraShake;
     private bool canPassLevel = true;
+
+    [System.Serializable]
+    public struct SaveData
+    {
+        public List<int>          savedLevelsScore;
+        public List<bool>         savedLevelsUnlocked;
+    }
 
     public void CreateLevel(ILevel newLevel)
     {
@@ -103,5 +112,41 @@ public class AllLevels : MonoBehaviour
         levelLoader.LoadNewLevel(level);
         levelLoader.ChangeLevel(level);  
         canPassLevel = true;    
+    }
+
+    public void CreateSaveLists()
+    {
+        levelsScore = new List<int>();
+        levelsUnlocked = new List<bool>();
+        foreach(ILevel level in allLevels)
+        {
+            levelsScore.Add(level.Score);
+            levelsUnlocked.Add(level.IsLocked);
+        }
+    }
+
+    public void SetLevelSavedInformation()
+    {
+        for(int i = 0; i < allLevels.Count; i++)
+        {
+            ILevel level = allLevels[i];
+            level.LoadSavedLevel(levelsScore[i],levelsUnlocked[i]);
+        }
+    }
+
+    public SaveData GetSaveData()
+    {
+        SaveData saveData;
+        CreateSaveLists();
+        saveData.savedLevelsScore = levelsScore;
+        saveData.savedLevelsUnlocked = levelsUnlocked;
+
+        return saveData;
+    }
+
+    public void LoadSaveData(SaveData saveData)
+    {
+        levelsScore = saveData.savedLevelsScore;
+        levelsUnlocked = saveData.savedLevelsUnlocked;
     }
 }

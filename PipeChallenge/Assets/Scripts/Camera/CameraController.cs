@@ -3,23 +3,30 @@ using System;
 
 public class CameraController : MonoBehaviour
 {
-    private float minSize = 5.0f; // Minimum camera size
-    private float padding = 1.0f; // Optional padding around the objects
-
+    // Minimum camera size
+    private float minSize = 5.0f;
+    // Optional padding around the objects
+    private float padding = 1.0f;
+    // Main camera
     private Camera mainCamera;
 
+    /// <summary>
+    /// Method to define the main camera
+    /// </summary>
     private void Start()
     {
         mainCamera = Camera.main;
     }
 
-    // Call this method to adjust the camera size and position based on the grid size
+    /// <summary>
+    /// Method called to adjust the camera position based on the grid size
+    /// </summary>
+    /// <param name="gridSizeX">Grid size X</param>
+    /// <param name="gridSizeY">Grid size Y</param>
+    /// <param name="sizeAdd">Optional size to add</param>
     public void CalculateCameraPosition(int gridSizeX, int gridSizeY, float sizeAdd = 0f)
     {
-        // Calculate the target position based on the grid size
-        //float targetX = (float)(gridSizeX + 1) / 2; // Grid center in X-axis
-        // float targetY = (float)(-gridSizeY -1) / 2; // Grid center in Y-axis
-        // float targetX = (float)Mathf.Min(gridSizeX/2);
+        // Calculates the target position based on the grid size
         float targetX = (float)Math.Ceiling((float)gridSizeY/2f);
         float targetY = (float)-Math.Ceiling((float)gridSizeX/2f);
         Vector3 targetPosition = new Vector3(targetX, targetY, mainCamera.transform.position.z);
@@ -37,6 +44,12 @@ public class CameraController : MonoBehaviour
         mainCamera.orthographicSize = newSize;
     }
 
+    /// <summary>
+    /// Method called to adjust the camera size based on the grid size
+    /// </summary>
+    /// <param name="gridSizeX">Grid size X</param>
+    /// <param name="gridSizeY">Grid size Y</param>
+    /// <returns>New adjusted camera size</returns>
     public float CalculateCameraSize(int gridSizeX, int gridSizeY)
     {
         // Calculate the camera size to fit the grid size with padding

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface ILevel
 {
+    void LoadSavedLevel(int newScore, bool newLocked);
     int LevelNumber {get;}
     bool IsLocked {get;}
     bool IsPassed {get;}

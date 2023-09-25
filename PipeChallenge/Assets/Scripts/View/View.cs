@@ -333,6 +333,18 @@ public class View : MonoBehaviour
         if(isRestart)
         {
             cameraController.CalculateCameraPosition(gridSizeX, gridSizeY);
+            foreach(Transform pipe in pipeContainer)
+            {
+                PipeClick pipeClick = pipe.GetComponent<PipeClick>();
+                if(pipeClick != null)
+                {
+                    if(pipeClick.Pipe.TypeOfPipe != PipeType.light)
+                    {
+                        SpriteRenderer sr = pipe.GetComponent<SpriteRenderer>();
+                        sr.material = pipeMaterials[0];
+                    }
+                }
+            }
         }
         AnimateMap(true);
         InitiateLevel(currentLevel);

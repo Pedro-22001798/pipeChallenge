@@ -8,6 +8,12 @@ public class PlayerScore : MonoBehaviour
 
     public int Score {get; private set;}
 
+    [System.Serializable]
+    public struct SaveData
+    {
+        public int         savePlayerScore;
+    }
+
     void Start()
     {
         view.UpdateScoreText(Score);
@@ -23,5 +29,19 @@ public class PlayerScore : MonoBehaviour
     {
         Score = newScore;
         view.UpdateScoreText(Score);
+    }
+
+    public SaveData GetSaveData()
+    {
+        SaveData saveData;
+        saveData.savePlayerScore = Score;
+
+        return saveData;
+    }
+
+    public void LoadSaveData(SaveData saveData)
+    {
+        Score = saveData.savePlayerScore;
+        DefineScore(Score);
     }
 }

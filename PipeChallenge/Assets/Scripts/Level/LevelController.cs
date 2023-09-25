@@ -7,6 +7,7 @@ public class LevelController : MonoBehaviour
     [SerializeField] private LevelLoader levelLoader;
     [SerializeField] private AllLevels allLevels;
     [SerializeField] private LevelScoreCalculator scoreCalculator;
+    [SerializeField] private SaveManager saveManager;
     private List<IPipe> allEndingPipes = new List<IPipe>();
     private ILevel currentLevel;
     [SerializeField] private PlayerScore playerScore;
@@ -51,6 +52,7 @@ public class LevelController : MonoBehaviour
             playerScore.AddScore((tempPlayerScore-currentLevel.Score));
             currentLevel.PassLevel(tempPlayerScore);
         }
+        saveManager.SaveGame();
         GameStateMachine.Instance.PauseGame();
         StartCoroutine(GoNextLevel());
     }

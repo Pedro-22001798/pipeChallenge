@@ -54,7 +54,6 @@ public class LevelLoader : MonoBehaviour
     {
         if(HowManyLevelsExist() > CurrentLevel+1)
         {
-            Debug.Log($"{HowManyLevelsExist()} and {CurrentLevel+1}");
             ILevel level = allLevels.GetLevel(CurrentLevel+1);
             level.UnlockLevel();
         }

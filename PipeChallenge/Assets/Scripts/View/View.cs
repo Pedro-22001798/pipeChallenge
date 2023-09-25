@@ -341,7 +341,7 @@ public class View : MonoBehaviour
                     if(pipeClick.Pipe.TypeOfPipe != PipeType.light)
                     {
                         SpriteRenderer sr = pipe.GetComponent<SpriteRenderer>();
-                        sr.material = pipeMaterials[0];
+                        UnlightPipe(sr);
                     }
                 }
             }

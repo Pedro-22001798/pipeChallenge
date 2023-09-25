@@ -20,6 +20,7 @@ public class View : MonoBehaviour
     [SerializeField] private Skin[] allSkins;
     [SerializeField] private Animator[] optionsAnimators;
     [SerializeField] private GameObject levelPrefab;
+    [SerializeField] private GameObject[] stars;
     private ILevel currentLevel;
     bool isLerping = false;
     private List<Animator> allPipeAnimators;
@@ -210,7 +211,7 @@ public class View : MonoBehaviour
         isLerping = false;
     }
 
-    public void WinLevel()
+    public void WinLevel(int tempScore)
     {
         List<SpriteRenderer> sr = new List<SpriteRenderer>();
         foreach(Transform t in pipeContainer)
@@ -225,10 +226,17 @@ public class View : MonoBehaviour
                 }
             }
         }
+
+        for(int i = 0; i < tempScore; i++)
+        {
+            stars[i].SetActive(true);
+        }
+
         endBackgroundAnimator.SetTrigger("WinLevel");
         endTextAnimator.SetTrigger("WinLevel");
         SoundEffectManager.Instance.PlaySoundEffect(SoundEffect.win);
         StartCoroutine(LerpEndPipesMaterials(sr,0.5f));
+        StartCoroutine(WaitToHideStars());
     }
 
     private IEnumerator LerpEndPipesMaterials(List<SpriteRenderer> allEndPipes, float lerpDuration)
@@ -250,6 +258,13 @@ public class View : MonoBehaviour
         {
             sr.material = pipeMaterials[2];
         }
+    }
+
+    private IEnumerator WaitToHideStars()
+    {
+        yield return new WaitForSeconds(3.5f);
+        foreach(GameObject star in stars)
+            star.SetActive(false);        
     }
 
     public void ChangeSkin(SkinType skinType)

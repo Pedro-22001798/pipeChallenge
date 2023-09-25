@@ -39,13 +39,13 @@ public class LevelController : MonoBehaviour
 
     public void PassLevel()
     {
-        view.WinLevel();
+        float elpsedTime = LevelTimer.Instance.StopTimer();
+        int tempPlayerScore = scoreCalculator.CalculateScore(currentLevel,elpsedTime);
+        view.WinLevel(tempPlayerScore);
         if(!currentLevel.IsPassed)
         {
             levelLoader.UnlockNextLevel();
         }
-        float elpsedTime = LevelTimer.Instance.StopTimer();
-        int tempPlayerScore = scoreCalculator.CalculateScore(currentLevel,elpsedTime);
         if(tempPlayerScore > currentLevel.Score)
         {
             playerScore.AddScore((tempPlayerScore-currentLevel.Score));

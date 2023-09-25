@@ -15,7 +15,7 @@ public class View : MonoBehaviour
     [SerializeField] private ConnectionsController connectionsController;
     [SerializeField] private LevelController levelController;
     [SerializeField] private AllLevels allLevels;
-    [SerializeField] private Animator levelTransitor, endTextAnimator, endBackgroundAnimator, chooseLevelMenu;
+    [SerializeField] private Animator levelTransitor, endTextAnimator, endBackgroundAnimator, chooseLevelMenu, timerTextAnimator;
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Skin[] allSkins;
     [SerializeField] private Animator[] optionsAnimators;
@@ -42,6 +42,7 @@ public class View : MonoBehaviour
     {
         levelController.LoadNewLevel(level);
         connectionsController.DefinePipes();
+        timerTextAnimator.SetTrigger("Show");
     }
 
     public void LightPipe(SpriteRenderer sr)
@@ -182,6 +183,7 @@ public class View : MonoBehaviour
 
     public void LevelTransition()
     {
+        timerTextAnimator.SetTrigger("Hide");
         SoundEffectManager.Instance.PlaySoundEffect(SoundEffect.transition);
         levelTransitor.SetTrigger("PassLevel");
     }

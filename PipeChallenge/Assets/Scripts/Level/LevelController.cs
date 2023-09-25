@@ -17,6 +17,7 @@ public class LevelController : MonoBehaviour
         currentLevel = level;
         allEndingPipes = new List<IPipe>();
         allEndingPipes = level.GetAllEndingPipes();
+        LevelTimer.Instance.StartTimer();
     }
 
     public bool CheckIfLevelWon()
@@ -43,7 +44,8 @@ public class LevelController : MonoBehaviour
         {
             levelLoader.UnlockNextLevel();
         }
-        int tempPlayerScore = scoreCalculator.CalculateScore(currentLevel,20f);
+        float elpsedTime = LevelTimer.Instance.StopTimer();
+        int tempPlayerScore = scoreCalculator.CalculateScore(currentLevel,elpsedTime);
         if(tempPlayerScore > currentLevel.Score)
         {
             playerScore.AddScore((tempPlayerScore-currentLevel.Score));

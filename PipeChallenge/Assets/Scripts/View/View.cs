@@ -9,7 +9,7 @@ public class View : MonoBehaviour
 {
     [SerializeField] private Transform pipeContainer, skinsContainer, levelContainer;
     [SerializeField] private GameObject[] pipePrefabs;
-    [SerializeField] private TextMeshProUGUI currentLevelText, playerScoreText;
+    [SerializeField] private TextMeshProUGUI currentLevelText, playerScoreText, timerText;
     [SerializeField] private CameraController cameraController;
     [SerializeField] private Material[] pipeMaterials;
     [SerializeField] private ConnectionsController connectionsController;
@@ -441,5 +441,18 @@ public class View : MonoBehaviour
             chooseLevelMenu.SetTrigger("Show");
             CreateLevelsUI(allLevels.GetAllLevels());
         }
+    }
+
+    public void UpdateTimer(float time)
+    {
+        int minutes = Mathf.FloorToInt(time / 60f);
+        int seconds = Mathf.FloorToInt(time % 60f);
+        string timerString = string.Empty;
+        if(minutes > 0)
+            timerString = string.Format("{0:00}:{1:00}", minutes, seconds);
+        else
+            timerString = string.Format("{0:00}",seconds);
+
+        timerText.text = timerString;
     }
 }

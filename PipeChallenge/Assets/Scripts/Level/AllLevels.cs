@@ -26,21 +26,36 @@ public class AllLevels : MonoBehaviour
         {
             if(canPassLevel)
             {
-                if(!IsLevelLocked(levelLoader.CurrentLevel+1))
+                if(levelLoader.HowManyLevelsExist() > levelLoader.CurrentLevel+1)
                 {
-                    canPassLevel = false;
-                    view.LevelTransition();
-                    if(isAutomaticTransition)
+                    if(!IsLevelLocked(levelLoader.CurrentLevel+1))
                     {
-                        //view.OpenCloseOptions(false);
-                        GameStateMachine.Instance.ResumeGame();
+                        canPassLevel = false;
+                        view.LevelTransition();
+                        if(isAutomaticTransition)
+                        {
+                            //view.OpenCloseOptions(false);
+                            GameStateMachine.Instance.ResumeGame();
+                        }
+                        StartCoroutine(LoadAndChangeLevel(levelLoader.CurrentLevel+1));
                     }
-                    StartCoroutine(LoadAndChangeLevel(levelLoader.CurrentLevel+1));
+                    else
+                    {
+                        SoundEffectManager.Instance.PlaySoundEffect(SoundEffect.wrong);
+                        cameraShake.ShakeCamera();
+                    }
                 }
                 else
                 {
-                    SoundEffectManager.Instance.PlaySoundEffect(SoundEffect.wrong);
-                    cameraShake.ShakeCamera();
+                    if(GetLevel(levelLoader.CurrentLevel).IsPassed)
+                    {
+                        view.HideShowLevelMenu(true);
+                    }
+                    else
+                    {
+                        SoundEffectManager.Instance.PlaySoundEffect(SoundEffect.wrong);
+                        cameraShake.ShakeCamera();                        
+                    }
                 }
             }
         }

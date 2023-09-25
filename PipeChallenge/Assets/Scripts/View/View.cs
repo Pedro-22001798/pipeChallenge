@@ -456,6 +456,7 @@ public class View : MonoBehaviour
             optionsAnimators[0].gameObject.SetActive(false);
             OpenCloseOptions(!isShow);
             chooseLevelMenu.SetTrigger("Show");
+            timerTextAnimator.SetTrigger("Hide");
             CreateLevelsUI(allLevels.GetAllLevels());
         }
     }

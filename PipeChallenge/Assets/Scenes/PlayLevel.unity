@@ -993,6 +993,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: fda3d5c94ce3a02428122c2c3207c312, type: 2}
   connectionsController: {fileID: 2120485211}
   levelController: {fileID: 1339776299}
+  allLevels: {fileID: 1339776297}
   levelTransitor: {fileID: 1446172107}
   endTextAnimator: {fileID: 1733423841}
   endBackgroundAnimator: {fileID: 1623812438}
@@ -3329,7 +3330,7 @@ RectTransform:
   m_GameObject: {fileID: 1004391661}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 376640505}
@@ -4481,6 +4482,7 @@ GameObject:
   - component: {fileID: 1339776299}
   - component: {fileID: 1339776298}
   - component: {fileID: 1339776297}
+  - component: {fileID: 1339776301}
   m_Layer: 0
   m_Name: Level
   m_TagString: LevelParent
@@ -4529,6 +4531,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelLoader: {fileID: 1339776298}
   allLevels: {fileID: 1339776297}
+  scoreCalculator: {fileID: 1339776301}
   playerScore: {fileID: 2071661003}
   view: {fileID: 232459829}
 --- !u!4 &1339776300
@@ -4546,6 +4549,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1339776301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1339776296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c74a410155d4b34a8a502f351e74042, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1373007625
 GameObject:
   m_ObjectHideFlags: 0
@@ -5037,17 +5052,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
+      - m_Target: {fileID: 232459829}
+        m_TargetAssemblyTypeName: View, Assembly-CSharp
+        m_MethodName: HideShowLevelMenu
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Pressed
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1501596740
 MonoBehaviour:

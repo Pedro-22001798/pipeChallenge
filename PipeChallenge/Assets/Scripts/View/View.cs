@@ -424,6 +424,11 @@ public class View : MonoBehaviour
     {
         if(!isShow)
         {
+            foreach(Transform t in levelContainer)
+            {
+                Animator anim = t.GetComponent<Animator>();
+                anim.SetTrigger("Hide");
+            }
             chooseLevelMenu.SetTrigger("Hide");
             optionsAnimators[0].gameObject.SetActive(true);
             optionsAnimators[0].SetTrigger("Show");

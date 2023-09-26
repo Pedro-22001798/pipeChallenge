@@ -10,6 +10,7 @@ TagManager:
   - EndPipe
   - LightPipe
   - LevelParent
+  - MixPipe
   layers:
   - Default
   - TransparentFX

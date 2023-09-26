@@ -981,6 +981,7 @@ MonoBehaviour:
   pipePrefabs:
   - {fileID: 6033437455863990226, guid: c4ca85fa93172e548ad44177899e7e0f, type: 3}
   - {fileID: 3855155971912952351, guid: 41c81742cc8624347af8409fb9975b8c, type: 3}
+  - {fileID: 6033437455863990226, guid: b5fc32f8599cd4f439812a31f1a6728d, type: 3}
   - {fileID: 104832588578450293, guid: b24b5c9595aab4b489d67ded73a2e075, type: 3}
   - {fileID: 3715576686547826999, guid: 78607cd1973782e48a581550a999b6ab, type: 3}
   - {fileID: 6033437455863990226, guid: 9b26ef837ca96754aa053c58c7b237d5, type: 3}
@@ -1005,11 +1006,13 @@ MonoBehaviour:
   - skins:
     - {fileID: 21300000, guid: 496e6286621be9a4eaf5669dbed64995, type: 3}
     - {fileID: 21300000, guid: eb20d8e8d97194b4a8d33f30c3da013c, type: 3}
+    - {fileID: 21300000, guid: 5cfe0af04f518b8468dc27fa8bfc3145, type: 3}
     - {fileID: 21300000, guid: ad2cba13f8a054b459b9767535798b8a, type: 3}
     - {fileID: 21300000, guid: 5801a9ee4032e39459b53df5e67698dd, type: 3}
   - skins:
     - {fileID: 21300000, guid: 496e6286621be9a4eaf5669dbed64995, type: 3}
     - {fileID: 21300000, guid: eb20d8e8d97194b4a8d33f30c3da013c, type: 3}
+    - {fileID: 21300000, guid: 5cfe0af04f518b8468dc27fa8bfc3145, type: 3}
     - {fileID: 21300000, guid: bd89882d9e397e645b0be99070e0cb80, type: 3}
     - {fileID: 21300000, guid: 451c12319a5bf384aa97fddbc3894d4e, type: 3}
   optionsAnimators:

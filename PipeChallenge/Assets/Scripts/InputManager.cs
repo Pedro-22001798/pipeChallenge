@@ -17,7 +17,7 @@ public class InputManager : MonoBehaviour
 
                 if(hit == true)
                 {
-                    if(hit.collider.tag == "NormalPipe" || hit.collider.tag == "CurvePipe" || hit.collider.tag == "EndPipe")
+                    if(hit.collider.tag == "NormalPipe" || hit.collider.tag == "CurvePipe" || hit.collider.tag == "EndPipe" || hit.collider.tag == "MixPipe")
                     {
                         // Check if the object has a PipeClick component
                         PipeClick pipeClick = hit.collider.GetComponent<PipeClick>();

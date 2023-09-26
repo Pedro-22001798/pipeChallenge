@@ -84,6 +84,8 @@ public class FileReader : MonoBehaviour
                 return PipeType.normal;
             case "curve":
                 return PipeType.curve;
+            case "mix":
+                return PipeType.mix;
             case "light":
                 return PipeType.light;
             case "end":

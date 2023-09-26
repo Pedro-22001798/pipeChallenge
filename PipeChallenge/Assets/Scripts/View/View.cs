@@ -145,13 +145,15 @@ public class View : MonoBehaviour
                 return pipePrefabs[0];
             case PipeType.curve:
                 return pipePrefabs[1];
-            case PipeType.light:
+            case PipeType.mix:
                 return pipePrefabs[2];
-            case PipeType.end:
+            case PipeType.light:
                 return pipePrefabs[3];
+            case PipeType.end:
+                return pipePrefabs[4];
         }
 
-        return pipePrefabs[4];
+        return pipePrefabs[5];
     }
 
     public void PauseGame()

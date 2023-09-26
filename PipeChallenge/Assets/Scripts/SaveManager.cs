@@ -22,7 +22,7 @@ public class SaveManager : MonoBehaviour
     void Awake()
     {
         _saveFilePath = Application.persistentDataPath + "/" + SAVE_FILENAME;
-        LoadGame();
+        //LoadGame();
     }
 
     public void SaveGame()

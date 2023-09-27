@@ -15,6 +15,7 @@ public class View : MonoBehaviour
     [SerializeField] private ConnectionsController connectionsController;
     [SerializeField] private LevelController levelController;
     [SerializeField] private AllLevels allLevels;
+    [SerializeField] private StageController stageController;
     [SerializeField] private Animator levelTransitor, endTextAnimator, endBackgroundAnimator, chooseLevelMenu, timerTextAnimator;
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Skin[] allSkins;
@@ -471,7 +472,7 @@ public class View : MonoBehaviour
             OpenCloseOptions(!isShow);
             chooseLevelMenu.SetTrigger("Show");
             timerTextAnimator.SetTrigger("Hide");
-            CreateLevelsUI(allLevels.GetAllLevels());
+            CreateLevelsUI(stageController.GetAllStageLevels(stageController.CurrentStage));
         }
     }
 

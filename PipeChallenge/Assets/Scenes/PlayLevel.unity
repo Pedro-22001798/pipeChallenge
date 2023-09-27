@@ -988,6 +988,7 @@ MonoBehaviour:
   currentLevelText: {fileID: 2073378316}
   playerScoreText: {fileID: 746935885}
   timerText: {fileID: 1078620739}
+  stageText: {fileID: 891087774}
   cameraController: {fileID: 717941606}
   pipeMaterials:
   - {fileID: 2100000, guid: 93839736104a7614c9cd73f414b2bf57, type: 2}
@@ -996,6 +997,7 @@ MonoBehaviour:
   connectionsController: {fileID: 2120485211}
   levelController: {fileID: 1339776299}
   allLevels: {fileID: 1339776297}
+  stageController: {fileID: 925663895}
   levelTransitor: {fileID: 1446172107}
   endTextAnimator: {fileID: 1733423841}
   endBackgroundAnimator: {fileID: 1623812438}
@@ -4604,8 +4606,8 @@ MonoBehaviour:
   m_StartAxis: 0
   m_CellSize: {x: 150, y: 150}
   m_Spacing: {x: 100, y: 85}
-  m_Constraint: 0
-  m_ConstraintCount: 2
+  m_Constraint: 1
+  m_ConstraintCount: 3
 --- !u!1 &1146867085
 GameObject:
   m_ObjectHideFlags: 0
@@ -5334,6 +5336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveManager: {fileID: 925663894}
+  stageController: {fileID: 925663895}
 --- !u!114 &1339776299
 MonoBehaviour:
   m_ObjectHideFlags: 0

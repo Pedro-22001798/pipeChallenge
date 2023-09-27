@@ -15,7 +15,6 @@ public class Level : ILevel
     {
         this.LevelNumber = levelNumber;
         this.StageNumber = stageNumber;
-        Debug.Log($"Lvl {LevelNumber} on stage {StageNumber}");
         this.allPipes = allPipes;
         this.IsPassed = isPassed;
         this.IsLocked = isLocked;

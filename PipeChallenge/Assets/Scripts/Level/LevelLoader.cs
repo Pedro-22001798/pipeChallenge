@@ -5,6 +5,7 @@ using UnityEngine;
 public class LevelLoader : MonoBehaviour
 {
     [SerializeField] private SaveManager saveManager;
+    [SerializeField] private StageController stageController;
     private LevelController levelController;
     private Levels levels;
     private FileReader fileReader;
@@ -27,12 +28,14 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadNewLevel(int levelNumber)
     {
+        stageController.LoadLevel(allLevels.GetLevel(levelNumber));
         view.BuildLevel(allLevels.GetLevel(levelNumber));
         CurrentLevel = allLevels.GetLevel(levelNumber).LevelNumber-1;
     }
 
     public void LoadNewLevel(ILevel level)
     {
+        stageController.LoadLevel(level);
         view.BuildLevel(level);
         CurrentLevel = level.LevelNumber-1;
     }
@@ -45,7 +48,8 @@ public class LevelLoader : MonoBehaviour
         }
         if(saveManager.SaveExists)
             allLevels.SetLevelSavedInformation();
-        view.CreateLevelsUI(allLevels.GetAllLevels());
+        stageController.LoadGame(allLevels.GetAllLevels());
+        view.CreateLevelsUI(stageController.GetAllStageLevels(stageController.CurrentStage));
     }
 
     public void ChangeLevel(int newNumLevel)

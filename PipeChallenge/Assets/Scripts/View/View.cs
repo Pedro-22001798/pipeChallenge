@@ -9,7 +9,7 @@ public class View : MonoBehaviour
 {
     [SerializeField] private Transform pipeContainer, skinsContainer, levelContainer;
     [SerializeField] private GameObject[] pipePrefabs;
-    [SerializeField] private TextMeshProUGUI currentLevelText, playerScoreText, timerText;
+    [SerializeField] private TextMeshProUGUI currentLevelText, playerScoreText, timerText, stageText;
     [SerializeField] private CameraController cameraController;
     [SerializeField] private Material[] pipeMaterials;
     [SerializeField] private ConnectionsController connectionsController;
@@ -486,5 +486,10 @@ public class View : MonoBehaviour
             timerString = string.Format("{0:00}",seconds);
 
         timerText.text = timerString;
+    }
+
+    public void UpdateStageText(int stage)
+    {
+        stageText.text = $"Stage #{stage}";
     }
 }

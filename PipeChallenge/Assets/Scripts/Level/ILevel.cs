@@ -6,6 +6,7 @@ public interface ILevel
 {
     void LoadSavedLevel(int newScore, bool newLocked);
     int LevelNumber {get;}
+    int StageNumber {get;}
     bool IsLocked {get;}
     bool IsPassed {get;}
     int Score {get;}

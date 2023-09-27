@@ -35,5 +35,25 @@ public class Levels : MonoBehaviour
                  "empty,0,empty,0,empty,0,curve,90,curve,180\n" +
                  "empty,0,curve,90,curve,180,empty,0,light,270\n" +
                  "end,0,curve,90,curve,180,normal,0,curve,90");
+
+        Maps.Add("light,0,mix,0,curve,90\n" +
+                 "empty,0,normal,0,normal,0\n" +
+                 "empty,0,end,180,end,180");
+
+        Maps.Add("light,0,mix,0,curve,90\n" +
+                 "empty,0,normal,0,normal,0\n" +
+                 "empty,0,end,180,end,180");
+
+        Maps.Add("light,0,mix,0,curve,90\n" +
+                 "empty,0,normal,0,normal,0\n" +
+                 "empty,0,end,180,end,180");
+
+        Maps.Add("light,0,mix,0,curve,90\n" +
+                 "empty,0,normal,0,normal,0\n" +
+                 "empty,0,end,180,end,180");
+
+        Maps.Add("light,0,mix,0,curve,90\n" +
+                 "empty,0,normal,0,normal,0\n" +
+                 "empty,0,end,180,end,180");
     }
 }

@@ -5,14 +5,17 @@ using UnityEngine;
 public class Level : ILevel
 {
     public int LevelNumber {get; private set;}
+    public int StageNumber {get; private set;}
     List<IPipe> allPipes = new List<IPipe>();
     public bool IsLocked {get; private set;}
     public bool IsPassed {get; private set;}
     public int Score {get; private set;}
 
-    public Level(int levelNumber, List<IPipe> allPipes, bool isPassed, bool isLocked)
+    public Level(int levelNumber, int stageNumber, List<IPipe> allPipes, bool isPassed, bool isLocked)
     {
         this.LevelNumber = levelNumber;
+        this.StageNumber = stageNumber;
+        Debug.Log($"Lvl {LevelNumber} on stage {StageNumber}");
         this.allPipes = allPipes;
         this.IsPassed = isPassed;
         this.IsLocked = isLocked;

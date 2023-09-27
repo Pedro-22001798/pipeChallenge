@@ -61,10 +61,13 @@ public class FileReader : MonoBehaviour
             }
         }
         ILevel newLevel;
+        int currentStage = (currentLevel - 1) / 10 + 1;
         if (currentLevel == 1)
-            newLevel = new Level(currentLevel, allPipes, false, false);
+            newLevel = new Level(currentLevel, 1, allPipes, false, false);
         else
-            newLevel = new Level(currentLevel, allPipes, false, true);
+        {
+            newLevel = new Level(currentLevel, currentStage, allPipes, false, true);
+        }
         
         allLevels.CreateLevel(newLevel);
         

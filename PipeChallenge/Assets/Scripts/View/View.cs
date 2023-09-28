@@ -42,7 +42,9 @@ public class View : MonoBehaviour
 
     private void InitiateLevel(ILevel level)
     {
+        // can go to controller
         levelController.LoadNewLevel(level);
+        // can go to controller
         connectionsController.DefinePipes();
         timerTextAnimator.SetTrigger("Show");
     }
@@ -378,6 +380,7 @@ public class View : MonoBehaviour
         }
     }
 
+    // can go to controller
     private void ShuffleList<T>(List<T> list)
     {
         int n = list.Count;

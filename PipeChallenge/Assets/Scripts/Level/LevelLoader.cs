@@ -12,7 +12,7 @@ public class LevelLoader : MonoBehaviour
     private AllLevels allLevels;
     private View view;
     public int CurrentLevel {get; private set;} = 0;
-    private List<string> allStringLevels;
+    private List<LevelInformation> allStringLevels;
 
     public void StartGame(LevelController levelController, Levels levels, FileReader fileReader, AllLevels allLevels, View view)
     {
@@ -21,7 +21,7 @@ public class LevelLoader : MonoBehaviour
         this.fileReader = fileReader;
         this.allLevels = allLevels;
         this.view = view;
-        allStringLevels = new List<string>();
+        allStringLevels = new List<LevelInformation>();
         allStringLevels = levels.Maps;
         BuildAllLevels();
     }
@@ -44,7 +44,7 @@ public class LevelLoader : MonoBehaviour
     {
         for(int i = 0; i < allStringLevels.Count; i++)
         {
-            ILevel level = fileReader.ReadFile(allStringLevels[i], i+1);
+            ILevel level = fileReader.ReadFile(allStringLevels[i].Level, i+1);
         }
         if(saveManager.SaveExists)
             allLevels.SetLevelSavedInformation();

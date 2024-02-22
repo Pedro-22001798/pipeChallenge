@@ -10,6 +10,8 @@ public class Level : ILevel
     public bool IsLocked {get; private set;}
     public bool IsPassed {get; private set;}
     public int Score {get; private set;}
+    public int MaxMoves {get; private set;}
+    public int UsedMoves {get; private set;}
 
     public Level(int levelNumber, int stageNumber, List<IPipe> allPipes, bool isPassed, bool isLocked)
     {
@@ -24,6 +26,7 @@ public class Level : ILevel
     {
         this.IsLocked = newLocked;
         this.Score = newScore;
+        //Dar load dos usedmoves
         if(IsLocked)
         {
             IsPassed = false;
@@ -41,6 +44,7 @@ public class Level : ILevel
             IsPassed = true;
         if(score > this.Score)
             this.Score = score;
+        //Meter novo num de moves se for inferior
     }
 
     public List<IPipe> GetAllPipes()

@@ -10,6 +10,8 @@ public interface ILevel
     bool IsLocked {get;}
     bool IsPassed {get;}
     int Score {get;}
+    int MaxMoves {get;}
+    int UsedMoves {get;}
     void PassLevel(int score);
     void UnlockLevel();
     List<IPipe> GetAllPipes();

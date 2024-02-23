@@ -12,25 +12,32 @@ public class LevelController : MonoBehaviour
     private ILevel currentLevel;
     [SerializeField] private PlayerScore playerScore;
     [SerializeField] private View view;
+    private bool hasMoreMoves;
 
     public void LoadNewLevel(ILevel level)
     {
         currentLevel = level;
         allEndingPipes = new List<IPipe>();
         allEndingPipes = level.GetAllEndingPipes();
+        hasMoreMoves = true;
         LevelTimer.Instance.StartTimer();
     }
 
-    public bool CheckIfLevelWon()
+    public void CheckIfLevelWon()
     {
         foreach(IPipe p in allEndingPipes)
         {
             if(p.IsLight == false)
             {
-                return false;
+                if(!hasMoreMoves)
+                {
+                    Debug.Log("perdeste!");
+                }
+                return;
             }
         }
-        return true;
+
+        PassLevel();
     }
 
     public ILevel GetCurrentLevel()
@@ -60,6 +67,11 @@ public class LevelController : MonoBehaviour
     public bool IsLevelPassed()
     {
         return currentLevel.IsPassed;
+    }
+
+    public void ChangeMoveStatus(bool newStatus)
+    {
+        this.hasMoreMoves = newStatus;
     }
 
     private IEnumerator GoNextLevel()

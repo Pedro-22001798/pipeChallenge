@@ -44,7 +44,7 @@ public class LevelLoader : MonoBehaviour
     {
         for(int i = 0; i < allStringLevels.Count; i++)
         {
-            ILevel level = fileReader.ReadFile(allStringLevels[i].Level, i+1);
+            ILevel level = fileReader.ReadFile(allStringLevels[i].Level, i+1, allStringLevels[i].MaxMoves);
         }
         if(saveManager.SaveExists)
             allLevels.SetLevelSavedInformation();

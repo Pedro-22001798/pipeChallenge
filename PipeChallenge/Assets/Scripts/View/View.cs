@@ -9,7 +9,7 @@ public class View : MonoBehaviour
 {
     [SerializeField] private Transform pipeContainer, skinsContainer, levelContainer;
     [SerializeField] private GameObject[] pipePrefabs;
-    [SerializeField] private TextMeshProUGUI currentLevelText, playerScoreText, timerText, stageText;
+    [SerializeField] private TextMeshProUGUI currentLevelText, playerScoreText, timerText, stageText, playerMovesText;
     [SerializeField] private CameraController cameraController;
     [SerializeField] private Material[] pipeMaterials;
     [SerializeField] private ConnectionsController connectionsController;
@@ -37,6 +37,7 @@ public class View : MonoBehaviour
     {
         currentLevel = level;
         currentLevelText.text = $"{level.LevelNumber}#";
+        MovesManager.Instance.LoadLevel(level);
         RebuildMap(true);
     }
 
@@ -197,6 +198,11 @@ public class View : MonoBehaviour
     public void UpdateScoreText(int score)
     {
         playerScoreText.text = $"Score = {score}";
+    }
+
+    public void UpdateMovesText(int currentMoves, int maxMoves)
+    {
+        playerMovesText.text = $"{currentMoves}/{maxMoves}";
     }
 
     private IEnumerator LerpCameraSize(float targetSize, float lerpDuration)

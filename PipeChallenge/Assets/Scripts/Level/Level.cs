@@ -13,13 +13,14 @@ public class Level : ILevel
     public int MaxMoves {get; private set;}
     public int UsedMoves {get; private set;}
 
-    public Level(int levelNumber, int stageNumber, List<IPipe> allPipes, bool isPassed, bool isLocked)
+    public Level(int levelNumber, int stageNumber, List<IPipe> allPipes, bool isPassed, bool isLocked, int maxMoves)
     {
         this.LevelNumber = levelNumber;
         this.StageNumber = stageNumber;
         this.allPipes = allPipes;
         this.IsPassed = isPassed;
         this.IsLocked = isLocked;
+        this.MaxMoves = maxMoves;
     }
 
     public void LoadSavedLevel(int newScore, bool newLocked)

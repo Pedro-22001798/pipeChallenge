@@ -26,8 +26,12 @@ public class PipeClick : MonoBehaviour
         {
             if(!isBlock)
             {
-                view.RotatePipe(this.transform,this);
-                Pipe.RotatePipe();
+                if(MovesManager.Instance.HasMoreMoves())
+                {
+                    view.RotatePipe(this.transform,this);
+                    Pipe.RotatePipe();
+                    MovesManager.Instance.AddMove();
+                }
             }
             else
             {

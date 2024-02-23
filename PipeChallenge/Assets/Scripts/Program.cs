@@ -15,5 +15,6 @@ public class Program : MonoBehaviour
     {
         fileReader.StartGame(allLevels,view);
         levelLoader.StartGame(levelController,levels,fileReader,allLevels, view);
+        MovesManager.Instance.DefineProperties(levelController,view);
     }
 }

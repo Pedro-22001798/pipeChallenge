@@ -53,10 +53,7 @@ public class ConnectionsController : MonoBehaviour
             pc.LightPipe();
         }
 
-        if(levelController.CheckIfLevelWon())
-        {
-            levelController.PassLevel();
-        }
+        levelController.CheckIfLevelWon();
     }
 
     private void GetConnectedPipes(PipeClick pipeClick)

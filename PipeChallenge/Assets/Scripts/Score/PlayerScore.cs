@@ -22,6 +22,7 @@ public class PlayerScore : MonoBehaviour
     public void AddScore(int newScore)
     {
         Score += newScore;
+        PlayerXPManager.Instance.AddXP(newScore);
         view.UpdateScoreText(Score);
     }
 

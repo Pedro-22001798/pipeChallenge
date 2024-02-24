@@ -9,12 +9,14 @@ public class SaveManager : MonoBehaviour
 
     public AllLevels allLevels;
     public PlayerScore playerScore;
+    public PlayerXPManager playerXP;
 
     [System.Serializable]
     private struct GameSaveData
     {
         public AllLevels.SaveData allLevelsSaveData;
         public PlayerScore.SaveData playerScoreSaveData;
+        public PlayerXPManager.SaveData playerXPSaveData;
     }
 
     public bool SaveExists {get; private set;}
@@ -30,6 +32,7 @@ public class SaveManager : MonoBehaviour
         GameSaveData saveData;
         saveData.allLevelsSaveData = allLevels.GetSaveData();
         saveData.playerScoreSaveData = playerScore.GetSaveData();
+        saveData.playerXPSaveData = playerXP.GetSaveData();
         string jsonSaveData = JsonUtility.ToJson(saveData, true);
         File.WriteAllText(_saveFilePath, jsonSaveData);
     }
@@ -43,12 +46,14 @@ public class SaveManager : MonoBehaviour
             GameSaveData saveData = JsonUtility.FromJson<GameSaveData>(jsonSaveData);
             allLevels.LoadSaveData(saveData.allLevelsSaveData);
             playerScore.LoadSaveData(saveData.playerScoreSaveData);
+            playerXP.LoadSaveData(saveData.playerXPSaveData);
         }
         else
         {
             SaveExists = false;
             allLevels.CreateSaveLists();
             playerScore.DefineScore(0);
+            playerXP.ResetInfomartion();
         }
     }
 }

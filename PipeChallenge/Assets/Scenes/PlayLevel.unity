@@ -3777,6 +3777,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allLevels: {fileID: 1339776297}
   playerScore: {fileID: 2071661003}
+  playerXP: {fileID: 0}
 --- !u!114 &925663895
 MonoBehaviour:
   m_ObjectHideFlags: 0

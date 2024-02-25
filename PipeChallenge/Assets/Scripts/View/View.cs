@@ -9,14 +9,14 @@ public class View : MonoBehaviour
 {
     [SerializeField] private Transform pipeContainer, skinsContainer, levelContainer;
     [SerializeField] private GameObject[] pipePrefabs;
-    [SerializeField] private TextMeshProUGUI currentLevelText, playerScoreText, timerText, stageText, playerMovesText;
+    [SerializeField] private TextMeshProUGUI currentLevelText, playerScoreText, timerText, stageText, playerMovesText, currentLevelTopText;
     [SerializeField] private CameraController cameraController;
     [SerializeField] private Material[] pipeMaterials;
     [SerializeField] private ConnectionsController connectionsController;
     [SerializeField] private LevelController levelController;
     [SerializeField] private AllLevels allLevels;
     [SerializeField] private StageController stageController;
-    [SerializeField] private Animator levelTransitor, endTextAnimator, endBackgroundAnimator, chooseLevelMenu, timerTextAnimator;
+    [SerializeField] private Animator levelTransitor, endTextAnimator, endBackgroundAnimator, chooseLevelMenu, timerTextAnimator, levelInformationAnimator;
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Skin[] allSkins;
     [SerializeField] private Animator[] optionsAnimators;
@@ -37,6 +37,7 @@ public class View : MonoBehaviour
     {
         currentLevel = level;
         currentLevelText.text = $"{level.LevelNumber}#";
+        currentLevelTopText.text = $"#{level.LevelNumber}";
         MovesManager.Instance.LoadLevel(level);
         RebuildMap(true);
     }
@@ -47,7 +48,8 @@ public class View : MonoBehaviour
         levelController.LoadNewLevel(level);
         // can go to controller
         connectionsController.DefinePipes();
-        timerTextAnimator.SetTrigger("Show");
+        //timerTextAnimator.SetTrigger("Show");
+        levelInformationAnimator.SetTrigger("Show");
     }
 
     public void LightPipe(SpriteRenderer sr)
@@ -169,6 +171,7 @@ public class View : MonoBehaviour
                 {
                     float currentSize = cameraController.CalculateCameraSize(gridSizeX,gridSizeY);
                     float newSize = currentSize + 2f;
+                    levelInformationAnimator.SetTrigger("Hide");
                     StartCoroutine(LerpCameraSize(newSize,0.5f));
                 }
             }
@@ -183,6 +186,7 @@ public class View : MonoBehaviour
             {
                 float currentSize = mainCamera.orthographicSize;
                 float newSize = cameraController.CalculateCameraSize(gridSizeX,gridSizeY);
+                levelInformationAnimator.SetTrigger("Show");
                 StartCoroutine(LerpCameraSize(newSize,0.5f)); 
             } 
         }    
@@ -202,7 +206,7 @@ public class View : MonoBehaviour
 
     public void UpdateMovesText(int currentMoves, int maxMoves)
     {
-        playerMovesText.text = $"{currentMoves}/{maxMoves}";
+        playerMovesText.text = $"{currentMoves}";
     }
 
     private IEnumerator LerpCameraSize(float targetSize, float lerpDuration)

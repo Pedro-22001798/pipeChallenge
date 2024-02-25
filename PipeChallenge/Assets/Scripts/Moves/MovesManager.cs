@@ -34,13 +34,13 @@ public class MovesManager : MonoBehaviour
         this.currentLevel = level;
         this.MaxMoves = currentLevel.MaxMoves;
         this.CurrentMoves = 0;
-        view.UpdateMovesText(CurrentMoves,MaxMoves);
+        view.UpdateMovesText(MaxMoves-CurrentMoves,MaxMoves);
     }
 
     public void AddMove()
     {
         this.CurrentMoves++;
-        view.UpdateMovesText(CurrentMoves,MaxMoves);
+        view.UpdateMovesText(MaxMoves-CurrentMoves,MaxMoves);
         
         if(CurrentMoves == MaxMoves)
         {

@@ -35,6 +35,9 @@ public class MovesManager : MonoBehaviour
         this.MaxMoves = currentLevel.MaxMoves;
         this.CurrentMoves = 0;
         view.UpdateMovesText(MaxMoves-CurrentMoves,MaxMoves);
+        ScorePredictor.Instance.LoadLevel(level);
+        int scorePrediction = ScorePredictor.Instance.PredictScore(CurrentMoves);
+        ViewScorePredictor.Instance.UpdateScorePrediction(scorePrediction);
     }
 
     public void AddMove()
@@ -42,6 +45,8 @@ public class MovesManager : MonoBehaviour
         this.CurrentMoves++;
         view.UpdateMovesText(MaxMoves-CurrentMoves,MaxMoves);
         ViewMoves.Instance.AddMove();
+        int scorePrediction = ScorePredictor.Instance.PredictScore(CurrentMoves);
+        ViewScorePredictor.Instance.UpdateScorePrediction(scorePrediction);
         if(CurrentMoves == MaxMoves)
         {
             levelController.ChangeMoveStatus(false);

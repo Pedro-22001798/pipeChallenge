@@ -41,7 +41,7 @@ public class MovesManager : MonoBehaviour
     {
         this.CurrentMoves++;
         view.UpdateMovesText(MaxMoves-CurrentMoves,MaxMoves);
-        
+        ViewMoves.Instance.AddMove();
         if(CurrentMoves == MaxMoves)
         {
             levelController.ChangeMoveStatus(false);

@@ -9,6 +9,7 @@ public class ViewScorePredictor : MonoBehaviour
     public static ViewScorePredictor Instance { get; private set; }
     [SerializeField] private Sprite fullStar, emptyStar;
     [SerializeField] private UnityEngine.UI.Image star1,star2,star3;
+    [SerializeField] private Animator star1Animator, star2Animator, star3Animator;
 
     void Awake()
     {
@@ -26,21 +27,19 @@ public class ViewScorePredictor : MonoBehaviour
     {
         if(prediction == 3)
         {
-            star1.sprite = fullStar;
-            star2.sprite = fullStar;
-            star3.sprite = fullStar;
+
         }
         else if(prediction == 2)
         {
-            star1.sprite = fullStar;
-            star2.sprite = fullStar;
-            star3.sprite = emptyStar;
+            star3Animator.SetTrigger("Hide");
+        }
+        else if(prediction == 1)
+        {
+            star2Animator.SetTrigger("Hide");
         }
         else
         {
-            star1.sprite = fullStar;
-            star2.sprite = emptyStar;
-            star3.sprite = emptyStar;
+            star1Animator.SetTrigger("Hide");
         }
     }
 }

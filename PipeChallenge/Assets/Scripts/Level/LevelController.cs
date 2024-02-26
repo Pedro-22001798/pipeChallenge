@@ -31,7 +31,7 @@ public class LevelController : MonoBehaviour
             {
                 if(!hasMoreMoves)
                 {
-                    Debug.Log("perdeste!");
+                    ViewScorePredictor.Instance.UpdateScorePrediction(0);
                 }
                 return;
             }

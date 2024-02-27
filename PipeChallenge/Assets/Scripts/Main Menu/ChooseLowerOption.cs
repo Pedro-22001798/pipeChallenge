@@ -6,19 +6,32 @@ public class ChooseLowerOption : MonoBehaviour
 {
     [SerializeField] private Animator playAnimator, shopAnimator, skinsAnimator, settingsAnimator;
     [SerializeField] private Material normalSkybox, hardcoreSkybox;
-    private Coroutine currentSkyboxLerpCoroutine;
-    private float lerpDuration = 2f;
 
     public void OpenNormalPlay()
     {
-        RenderSettings.skybox = normalSkybox;
-        DynamicGI.UpdateEnvironment();
+        if(GameModeManager.Instance.ChangeCurrentGameMode(GameMode.Normal))
+        {
+            RenderSettings.skybox = normalSkybox;
+            DynamicGI.UpdateEnvironment();
+        }
     }
 
     public void OpenHardcorePlay()
     {
-        RenderSettings.skybox = hardcoreSkybox;
-        DynamicGI.UpdateEnvironment();
+        if(GameModeManager.Instance.ChangeCurrentGameMode(GameMode.Hardcore))
+        {
+            RenderSettings.skybox = hardcoreSkybox;
+            DynamicGI.UpdateEnvironment();
+        }
+    }
+
+    public void OpenDailyPlay()
+    {
+        if(GameModeManager.Instance.ChangeCurrentGameMode(GameMode.Daily))
+        {
+            RenderSettings.skybox = normalSkybox;
+            DynamicGI.UpdateEnvironment();            
+        }
     }
 
     public void OpenPlay()

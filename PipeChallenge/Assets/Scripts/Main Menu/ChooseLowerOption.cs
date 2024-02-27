@@ -5,6 +5,22 @@ using UnityEngine;
 public class ChooseLowerOption : MonoBehaviour
 {
     [SerializeField] private Animator playAnimator, shopAnimator, skinsAnimator, settingsAnimator;
+    [SerializeField] private Material normalSkybox, hardcoreSkybox;
+    private Coroutine currentSkyboxLerpCoroutine;
+    private float lerpDuration = 2f;
+
+    public void OpenNormalPlay()
+    {
+        RenderSettings.skybox = normalSkybox;
+        DynamicGI.UpdateEnvironment();
+    }
+
+    public void OpenHardcorePlay()
+    {
+        RenderSettings.skybox = hardcoreSkybox;
+        DynamicGI.UpdateEnvironment();
+    }
+
     public void OpenPlay()
     {
         playAnimator.SetTrigger("Pressed");

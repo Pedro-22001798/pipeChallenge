@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Stage : MonoBehaviour, IStage
+public class Stage : IStage
 {
     public int CurrentStage {get; private set;}
     public int MinStars {get; private set;}
     public int CurrentStars {get; private set;}
     public bool IsUnlocked {get; private set;}
-    public List<ILevel> CurrentLevels {get; private set;}
+    public List<LevelInformation> CurrentLevels {get; private set;}
 
-    public void DefineLevels(int currentStage, List<ILevel> levels)
+    public Stage(int currentStage, List<LevelInformation> levels)
     {
         this.CurrentStage = currentStage;
         CurrentLevels = new List<LevelInformation>();
-        this.CurrentLevels = levels;
+        this.CurrentLevels = levels;        
     }
 
     public void CheckIfCanUnlock(int currentPlayerStars)

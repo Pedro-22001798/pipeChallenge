@@ -17,8 +17,17 @@ public class LevelInformation
 public class Levels : MonoBehaviour
 {
     public List<LevelInformation> Maps {get; private set;}
+    public List<LevelInformation> HardCoreMaps {get; private set;}
+    public List<LevelInformation> DailyMaps {get; private set;}
 
     void Awake()
+    {
+        CreateNormalMaps();
+        CreateHardCoreMaps();
+        CreateDailyMaps();
+    }
+
+    private void CreateNormalMaps()
     {
         Maps = new List<LevelInformation>();
 
@@ -66,6 +75,24 @@ public class Levels : MonoBehaviour
 
         Maps.Add(new LevelInformation("light,0,mix,0,curve,90\n" +
                  "empty,0,normal,0,normal,0\n" +
-                 "empty,0,end,180,end,180",15));
+                 "empty,0,end,180,end,180",15));        
     }
+
+    private void CreateHardCoreMaps()
+    {
+        HardCoreMaps = new List<LevelInformation>();
+
+        HardCoreMaps.Add(new LevelInformation("light,0,mix,0,curve,90\n" +
+                        "empty,0,normal,0normal,0\n" +
+                        "empty,0,end,180,end,180",10));
+    }
+
+    private void CreateDailyMaps()
+    {
+        DailyMaps = new List<LevelInformation>();
+
+        DailyMaps.Add(new LevelInformation("light,0,mix,0,curve,90\n" +
+                    "empty,0,normal,0normal,0\n" +
+                    "empty,0,end,180,end,180",10));
+    }    
 }

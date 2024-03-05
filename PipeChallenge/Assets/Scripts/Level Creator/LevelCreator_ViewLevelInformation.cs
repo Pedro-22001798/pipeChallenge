@@ -6,17 +6,19 @@ using UnityEngine.UI;
 using TMPro;
 public class LevelCreator_ViewLevelInformation : MonoBehaviour
 {
-    public static LevelCreator_ViewLevelInformation Instance {get; private set;}
     [SerializeField] private CameraController cameraController;
     private int rows, cols;
     [SerializeField] private GameObject emptyGrid;
     [SerializeField] private TextMeshProUGUI rowsText, colsText;
     [SerializeField] private Sprite normalSprite, curveSprite, lightSprite, endSprite, mixSprite;
     [SerializeField] private Transform pipeContainer;
+    private List<LevelCreator_PipeClick> allPipeClicks;
 
+    public static LevelCreator_ViewLevelInformation Instance { get; private set; }
+    
     void Awake()
     {
-        if(Instance != null && Instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(this);
         }
@@ -67,14 +69,27 @@ public class LevelCreator_ViewLevelInformation : MonoBehaviour
         this.cols = cols;  
         cameraController.CalculateCameraPosition(cols,rows);
         cameraController.CalculateCameraSize(cols,rows); 
+        allPipeClicks = new List<LevelCreator_PipeClick>();
         for(int col = 1; col <= cols; col++)
         {
             for(int row = 1; row <= rows; row++)
             {
                 GameObject emptyPipe = Instantiate(emptyGrid,new UnityEngine.Vector3(col,-row,0),UnityEngine.Quaternion.identity,pipeContainer);
                 LevelCreator_Pipe pipeInfo = emptyPipe.GetComponent<LevelCreator_Pipe>();
+                LevelCreator_PipeClick pipeClick = emptyPipe.GetComponent<LevelCreator_PipeClick>();
+                allPipeClicks.Add(pipeClick);
                 pipeInfo.DefineInformation(row,col);
             }
         }
+    }
+
+    public void ViewActionCanvas(GameObject actionCanvas)
+    {
+        GameObject[] allActionCanvas = GameObject.FindGameObjectsWithTag("ActionCanvas");
+        foreach(GameObject canvas in allActionCanvas)
+        {
+            canvas.SetActive(false);
+        }
+        actionCanvas.SetActive(true);
     }
 }

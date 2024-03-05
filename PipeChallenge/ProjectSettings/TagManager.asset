@@ -11,6 +11,7 @@ TagManager:
   - LightPipe
   - LevelParent
   - MixPipe
+  - ActionCanvas
   layers:
   - Default
   - TransparentFX

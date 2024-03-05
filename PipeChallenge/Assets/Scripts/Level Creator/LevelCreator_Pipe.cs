@@ -16,6 +16,8 @@ public class LevelCreator_Pipe : MonoBehaviour
         this.Row = row;
         this.Col = col;
         PipeImage = GetComponent<Image>();
+        LevelCreator_PipeClick pipeClick = GetComponent<LevelCreator_PipeClick>();
+        pipeClick.DefineInformation(Row,Col);
     }
 
     public void ChangePipeType(string newType)

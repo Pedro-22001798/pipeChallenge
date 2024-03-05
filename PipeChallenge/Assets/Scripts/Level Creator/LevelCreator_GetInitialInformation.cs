@@ -9,7 +9,10 @@ public class LevelCreator_GetInitialInformation : MonoBehaviour
 
     void Start()
     {
-        ResetLevel();
+        //ResetLevel();
+        Rows = 3;
+        Cols = 3;
+        CreateLevel();
     }
 
     public void CreateLevel()

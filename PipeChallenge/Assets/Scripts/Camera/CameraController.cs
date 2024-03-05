@@ -16,6 +16,10 @@ public class CameraController : MonoBehaviour
     private void Start()
     {
         mainCamera = Camera.main;
+        if(mainCamera == null)
+        {
+            mainCamera = GetComponent<Camera>();
+        }
     }
 
     /// <summary>
@@ -26,6 +30,10 @@ public class CameraController : MonoBehaviour
     /// <param name="sizeAdd">Optional size to add</param>
     public void CalculateCameraPosition(int gridSizeX, int gridSizeY, float sizeAdd = 0f)
     {
+        if(mainCamera == null)
+        {
+            mainCamera = GetComponent<Camera>();
+        }
         // Calculates the target position based on the grid size
         float targetX = (float)Math.Ceiling((float)gridSizeY/2f);
         float targetY = (float)-Math.Ceiling((float)gridSizeX/2f);

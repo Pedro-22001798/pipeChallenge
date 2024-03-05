@@ -67,9 +67,9 @@ public class LevelCreator_ViewLevelInformation : MonoBehaviour
         this.cols = cols;  
         cameraController.CalculateCameraPosition(cols,rows);
         cameraController.CalculateCameraSize(cols,rows); 
-        for(int col = 0; col < cols; col++)
+        for(int col = 1; col <= cols; col++)
         {
-            for(int row = 0; row < rows; row++)
+            for(int row = 1; row <= rows; row++)
             {
                 GameObject emptyPipe = Instantiate(emptyGrid,new UnityEngine.Vector3(col,-row,0),UnityEngine.Quaternion.identity,pipeContainer);
                 LevelCreator_Pipe pipeInfo = emptyPipe.GetComponent<LevelCreator_Pipe>();

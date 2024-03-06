@@ -9,14 +9,15 @@ public class LevelCreator_Pipe : MonoBehaviour
     public int Col {get; private set;}
     public PipeType TypeOfPipe {get; private set;}
     public float Rotation {get; private set;}
-    public Image PipeImage {get; private set;}
+    public SpriteRenderer pipeSpriteRenderer {get; private set;}
+    private LevelCreator_PipeClick pipeClick;
 
     public void DefineInformation(int row, int col)
     {
         this.Row = row;
         this.Col = col;
-        PipeImage = GetComponent<Image>();
-        LevelCreator_PipeClick pipeClick = GetComponent<LevelCreator_PipeClick>();
+        pipeSpriteRenderer = GetComponent<SpriteRenderer>();
+        pipeClick = GetComponent<LevelCreator_PipeClick>();
         pipeClick.DefineInformation(Row,Col);
     }
 
@@ -44,7 +45,7 @@ public class LevelCreator_Pipe : MonoBehaviour
                 break;
         }
 
-        LevelCreator_ViewLevelInformation.Instance.UpdatePipe(Row,Col,TypeOfPipe,Rotation,PipeImage,this.transform);
+        LevelCreator_ViewLevelInformation.Instance.UpdatePipe(Row,Col,TypeOfPipe,Rotation,pipeSpriteRenderer,this.transform);
     }
 
     public void RotatePipe(float rotation)
@@ -59,6 +60,6 @@ public class LevelCreator_Pipe : MonoBehaviour
             Rotation = 0;
         }
 
-        LevelCreator_ViewLevelInformation.Instance.UpdatePipe(Row,Col,TypeOfPipe,Rotation,PipeImage,this.transform);
+        LevelCreator_ViewLevelInformation.Instance.UpdatePipe(Row,Col,TypeOfPipe,Rotation,pipeSpriteRenderer,this.transform);
     }
 }

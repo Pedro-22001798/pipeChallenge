@@ -8,7 +8,7 @@ public class LevelCreator_ViewLevelInformation : MonoBehaviour
 {
     [SerializeField] private CameraController cameraController;
     private int rows, cols;
-    [SerializeField] private GameObject emptyGrid, levelCreationInformationCanvas, actionCanvas;
+    [SerializeField] private GameObject emptyGrid, levelCreationInformationCanvas, actionCanvas, pipeActionCanvas;
     [SerializeField] private TextMeshProUGUI rowsText, colsText;
     [SerializeField] private Sprite normalSprite, curveSprite, lightSprite, endSprite, mixSprite;
     [SerializeField] private Transform pipeContainer;
@@ -37,7 +37,7 @@ public class LevelCreator_ViewLevelInformation : MonoBehaviour
         colsText.text = cols.ToString();
     }
 
-    public void UpdatePipe(int row, int col, PipeType typeOfPipe, float rotation, Image pipeImage, Transform pipeParent)
+    public void UpdatePipe(int row, int col, PipeType typeOfPipe, float rotation, SpriteRenderer pipeImage, Transform pipeParent)
     {
         switch(typeOfPipe)
         {
@@ -60,7 +60,7 @@ public class LevelCreator_ViewLevelInformation : MonoBehaviour
                 pipeImage.sprite = null;
                 break;
         }
-        pipeParent.position = new UnityEngine.Vector3(0f,0f,0f);
+        pipeParent.position = new UnityEngine.Vector3(col,-row,0f);
         pipeParent.rotation = UnityEngine.Quaternion.Euler(new UnityEngine.Vector3(0f,0f,rotation));
     }
 
@@ -84,11 +84,11 @@ public class LevelCreator_ViewLevelInformation : MonoBehaviour
                 pipeInfo.DefineInformation(row,col);
             }
         }
-        allActionCanvas = GameObject.FindGameObjectsWithTag("ActionCanvas");
     }
 
-    public void ViewActionCanvas(GameObject actionCanvas)
+    public void ViewActionCanvas(int row, int col,LevelCreator_Pipe pipe)
     {
+        allActionCanvas = GameObject.FindGameObjectsWithTag("ActionCanvas");
         bool isAnyCanvasOn = false;
         foreach(GameObject canvas in allActionCanvas)
         {
@@ -100,11 +100,9 @@ public class LevelCreator_ViewLevelInformation : MonoBehaviour
 
         if(!isAnyCanvasOn)
         {
-            foreach(GameObject canvas in allActionCanvas)
-            {
-                canvas.SetActive(false);
-            }
-            actionCanvas.SetActive(true);
+            GameObject actionCanvas = Instantiate(pipeActionCanvas,new UnityEngine.Vector3(col,-row + 1.4f,0f),UnityEngine.Quaternion.identity);
+            LevelCreator_ActionCanvas levelCreatorActionCanvas = actionCanvas.GetComponent<LevelCreator_ActionCanvas>();
+            levelCreatorActionCanvas.GetInitialInformation(pipe);
         }
     }
 

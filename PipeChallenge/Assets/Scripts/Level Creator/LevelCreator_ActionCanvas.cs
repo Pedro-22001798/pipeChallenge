@@ -32,7 +32,8 @@ public class LevelCreator_ActionCanvas : MonoBehaviour
 
     public void RemovePipe()
     {
-
+        //LevelCreator_ViewLevelInformation.Instance.RemovePipe(Pipe.Row,Pipe.Col);
+        Pipe.ChangePipeType("empty");
     }
 
     public void CloseChangePipe()

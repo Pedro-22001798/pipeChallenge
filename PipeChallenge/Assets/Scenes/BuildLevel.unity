@@ -580,7 +580,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &603085305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2106,6 +2106,7 @@ MonoBehaviour:
   emptyGrid: {fileID: 6033437455863990226, guid: d64491800ff98cc4ba106aff3ff57e8b, type: 3}
   levelCreationInformationCanvas: {fileID: 1230977399}
   actionCanvas: {fileID: 603085304}
+  pipeActionCanvas: {fileID: 7395570680982550467, guid: f0cc8f1e3f4a3e9498229129164fd7eb, type: 3}
   rowsText: {fileID: 1421439357}
   colsText: {fileID: 1293986621}
   normalSprite: {fileID: 21300000, guid: 496e6286621be9a4eaf5669dbed64995, type: 3}

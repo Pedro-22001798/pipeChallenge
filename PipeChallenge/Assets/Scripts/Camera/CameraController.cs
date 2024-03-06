@@ -37,7 +37,11 @@ public class CameraController : MonoBehaviour
         // Calculates the target position based on the grid size
         float targetX = (float)Math.Ceiling((float)gridSizeY/2f);
         float targetY = (float)-Math.Ceiling((float)gridSizeX/2f);
-        Vector3 targetPosition = new Vector3(targetX, targetY, mainCamera.transform.position.z);
+
+        //TESTES
+        targetX = (float)gridSizeX/2f + 0.5f;
+        targetY = (float)gridSizeY/2f + 0.5f;
+        Vector3 targetPosition = new Vector3(targetX, -targetY, mainCamera.transform.position.z);
 
         // Set the camera position directly to the target position
         mainCamera.transform.position = targetPosition;

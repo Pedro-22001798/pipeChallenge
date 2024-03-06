@@ -7,18 +7,31 @@ public class LevelCreator_GetInitialInformation : MonoBehaviour
     public int Rows {get; private set;}
     public int Cols {get; private set;}
 
+    public static LevelCreator_GetInitialInformation Instance { get; private set; }
+    
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
     void Start()
     {
-        //ResetLevel();
-        Rows = 3;
-        Cols = 3;
-        CreateLevel();
+        ResetLevel();
     }
 
     public void CreateLevel()
     {
         if(Rows > 0 && Cols > 0)
+        {
             LevelCreator_ViewLevelInformation.Instance.PopulateGrid(Rows,Cols);
+        }
     }
 
     public void ResetLevel()
@@ -60,6 +73,6 @@ public class LevelCreator_GetInitialInformation : MonoBehaviour
 
     public void UpdateView()
     {
-        LevelCreator_ViewLevelInformation.Instance.UpdateView(Cols,Rows);
+        LevelCreator_ViewLevelInformation.Instance.UpdateView(Rows,Cols);
     }
 }

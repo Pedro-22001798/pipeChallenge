@@ -8,11 +8,12 @@ public class LevelCreator_ViewLevelInformation : MonoBehaviour
 {
     [SerializeField] private CameraController cameraController;
     private int rows, cols;
-    [SerializeField] private GameObject emptyGrid;
+    [SerializeField] private GameObject emptyGrid, levelCreationInformationCanvas, actionCanvas;
     [SerializeField] private TextMeshProUGUI rowsText, colsText;
     [SerializeField] private Sprite normalSprite, curveSprite, lightSprite, endSprite, mixSprite;
     [SerializeField] private Transform pipeContainer;
     private List<LevelCreator_PipeClick> allPipeClicks;
+    private GameObject[] allActionCanvas;
 
     public static LevelCreator_ViewLevelInformation Instance { get; private set; }
     
@@ -65,6 +66,8 @@ public class LevelCreator_ViewLevelInformation : MonoBehaviour
 
     public void PopulateGrid(int rows, int cols)
     {
+        levelCreationInformationCanvas.SetActive(false);
+        actionCanvas.SetActive(true);
         this.rows = rows;
         this.cols = cols;  
         cameraController.CalculateCameraPosition(cols,rows);
@@ -81,15 +84,38 @@ public class LevelCreator_ViewLevelInformation : MonoBehaviour
                 pipeInfo.DefineInformation(row,col);
             }
         }
+        allActionCanvas = GameObject.FindGameObjectsWithTag("ActionCanvas");
     }
 
     public void ViewActionCanvas(GameObject actionCanvas)
     {
-        GameObject[] allActionCanvas = GameObject.FindGameObjectsWithTag("ActionCanvas");
+        bool isAnyCanvasOn = false;
         foreach(GameObject canvas in allActionCanvas)
         {
-            canvas.SetActive(false);
+            if(canvas.activeSelf)
+            {
+                isAnyCanvasOn = true;
+            }
         }
-        actionCanvas.SetActive(true);
+
+        if(!isAnyCanvasOn)
+        {
+            foreach(GameObject canvas in allActionCanvas)
+            {
+                canvas.SetActive(false);
+            }
+            actionCanvas.SetActive(true);
+        }
+    }
+
+    public void RestartLevelCreation()
+    {
+        foreach(Transform pipe in pipeContainer)
+        {
+            Destroy(pipe.gameObject);
+        }
+        actionCanvas.SetActive(false);
+        levelCreationInformationCanvas.SetActive(true);
+        LevelCreator_GetInitialInformation.Instance.ResetLevel();
     }
 }

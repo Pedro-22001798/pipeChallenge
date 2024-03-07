@@ -6,6 +6,7 @@ public class ChooseLowerOption : MonoBehaviour
 {
     [SerializeField] private Animator playAnimator, shopAnimator, skinsAnimator, settingsAnimator;
     [SerializeField] private Material normalSkybox, hardcoreSkybox;
+    [SerializeField] private GameObject chooseGameModeCanvas, chooseNormalLevelCanvas;
 
     public void OpenNormalPlay()
     {
@@ -13,6 +14,8 @@ public class ChooseLowerOption : MonoBehaviour
         {
             RenderSettings.skybox = normalSkybox;
             DynamicGI.UpdateEnvironment();
+            chooseGameModeCanvas.SetActive(false);
+            chooseNormalLevelCanvas.SetActive(true);
         }
     }
 

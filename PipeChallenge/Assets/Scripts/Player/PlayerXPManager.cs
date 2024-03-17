@@ -49,6 +49,7 @@ public class PlayerXPManager : MonoBehaviour
     public void AddLevel(int level)
     {
         PlayerLevel = PlayerLevel + level;
+        PlayerRewards.Instance.UnlockReward(PlayerLevel);
         ViewPlayerXP.Instance.UpdatePlayerLevel(PlayerLevel);
     }
 

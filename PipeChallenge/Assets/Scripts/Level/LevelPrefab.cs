@@ -45,14 +45,24 @@ public class LevelPrefab : MonoBehaviour
     {
         foreach(Transform t in stars)
         {
-            Image sr = t.GetComponent<Image>();
-            sr.color = Color.black;
+            t.gameObject.SetActive(false);
         }
 
-        for(int i = 0; i < Stars; i++)
+        if(Stars == 0)
         {
-            Image sr = stars[i].GetComponent<Image>();
-            sr.color = Color.white;
+            stars[0].gameObject.SetActive(true);
+        }
+        else if(Stars == 1)
+        {
+            stars[1].gameObject.SetActive(true);
+        }
+        else if(Stars == 2)
+        {
+            stars[2].gameObject.SetActive(true);
+        }
+        else if(Stars == 3)
+        {
+            stars[3].gameObject.SetActive(true);
         }
     }
 
